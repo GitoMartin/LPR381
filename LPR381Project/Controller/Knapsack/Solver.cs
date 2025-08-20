@@ -27,6 +27,9 @@ namespace LPR381Project.Controller.Knapsack
                 .ToList();
         }
 
+        public List<Item> getItemsSorted() {             return _itemsSorted;
+        }
+
         public KnapsackResult Solve()
         {
             _bestValue = 0;

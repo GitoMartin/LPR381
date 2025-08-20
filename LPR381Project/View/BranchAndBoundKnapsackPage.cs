@@ -63,6 +63,8 @@ namespace LPR381Project
             Solver solver = new Solver(itemsEnumerable, capacity);
 
             KnapsackResult result = solver.Solve();
+            List<Item> itemSorted = solver.getItemsSorted();
+
 
             var sb = new StringBuilder();
 
@@ -70,12 +72,17 @@ namespace LPR381Project
             sb.AppendLine($"Total Value: {result.BestValue}");
             sb.AppendLine($"Total Weight: {result.BestWeight}");
             sb.AppendLine();
-
-            
-
             sb.Append("Items Taken (ID): ");
-            
-            sb.Append(string.Join(", ", result.BestTaken));
+            //sb.Append(string.Join(", ", result.BestTaken));
+            for (int i = 0; i < result.BestTaken.Length; i++)
+            {
+                if (result.BestTaken[i])
+                {
+                    sb.Append(itemSorted[i].Id + " ");
+                }
+            }
+
+
             BCRTB.Text = sb.ToString();
 
             var sbBranching = new StringBuilder();
