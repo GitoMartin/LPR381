@@ -46,6 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller\Knapsack\Solver.cs" />
+    <Compile Include="Model\Knapsack\Item.cs" />
+    <Compile Include="Model\Knapsack\KnapsackResult.cs" />
+    <Compile Include="Model\Knapsack\LogEntry.cs" />
+    <Compile Include="Model\Knapsack\Node.cs" />
     <Compile Include="View\BranchAndBoundKnapsackPage.cs">
       <SubType>UserControl</SubType>
     </Compile>

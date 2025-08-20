@@ -321,7 +321,7 @@ namespace LPR381Project
         private void BranchBoundKnap_Click(object sender, EventArgs e)
         {
             contentHost.Controls.Clear();
-            BranchAndBoundKnapsackPage revisedPage = new BranchAndBoundKnapsackPage();
+            BranchAndBoundKnapsackPage revisedPage = new BranchAndBoundKnapsackPage(model);
             revisedPage.Dock = DockStyle.Fill;
             contentHost.Controls.Add(revisedPage);
         }
@@ -355,7 +355,7 @@ namespace LPR381Project
         private void BranchBoundKnap_Click_1(object sender, EventArgs e)
         {
             contentHost.Controls.Clear();
-            BranchAndBoundKnapsackPage revisedPage = new BranchAndBoundKnapsackPage();
+            BranchAndBoundKnapsackPage revisedPage = new BranchAndBoundKnapsackPage(model);
             revisedPage.Dock = DockStyle.Fill;
             contentHost.Controls.Add(revisedPage);
         }
@@ -372,7 +372,7 @@ namespace LPR381Project
                     string content = System.IO.File.ReadAllText(ofd.FileName);
                     InputModelTxt.Text = content;
                     // Create model and reader
-                    LPModel model = new LPModel();
+                    model = new LPModel();
                     ReadWriter reader = new ReadWriter();
 
                     // Parse file into LPModel

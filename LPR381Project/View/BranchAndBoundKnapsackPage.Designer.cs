@@ -57,18 +57,19 @@
             this.connectHost2.Controls.Add(this.SpTIlbl);
             this.connectHost2.Controls.Add(this.BranchAndBoundLbl);
             this.connectHost2.CornerRadius = 12;
-            this.connectHost2.Location = new System.Drawing.Point(39, 27);
+            this.connectHost2.Location = new System.Drawing.Point(35, 22);
+            this.connectHost2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.connectHost2.Name = "connectHost2";
-            this.connectHost2.Size = new System.Drawing.Size(882, 910);
+            this.connectHost2.Size = new System.Drawing.Size(785, 728);
             this.connectHost2.TabIndex = 1;
             // 
             // BestCanLbl
             // 
             this.BestCanLbl.AutoSize = true;
             this.BestCanLbl.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BestCanLbl.Location = new System.Drawing.Point(24, 603);
+            this.BestCanLbl.Location = new System.Drawing.Point(21, 482);
             this.BestCanLbl.Name = "BestCanLbl";
-            this.BestCanLbl.Size = new System.Drawing.Size(226, 32);
+            this.BestCanLbl.Size = new System.Drawing.Size(189, 28);
             this.BestCanLbl.TabIndex = 24;
             this.BestCanLbl.Text = "Best Candidate";
             // 
@@ -81,9 +82,10 @@
             this.BCRTB.CornerRadius = 12;
             this.BCRTB.Font = new System.Drawing.Font("Cambria Math", 10F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BCRTB.ForeColor = System.Drawing.Color.White;
-            this.BCRTB.Location = new System.Drawing.Point(30, 653);
+            this.BCRTB.Location = new System.Drawing.Point(27, 522);
+            this.BCRTB.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.BCRTB.Name = "BCRTB";
-            this.BCRTB.Size = new System.Drawing.Size(849, 178);
+            this.BCRTB.Size = new System.Drawing.Size(755, 142);
             this.BCRTB.TabIndex = 23;
             this.BCRTB.Text = "  The best integer solution found will be displayed here...";
             // 
@@ -93,9 +95,10 @@
             this.exportBtn.CornerRadius = 8;
             this.exportBtn.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.exportBtn.ForeColor = System.Drawing.Color.White;
-            this.exportBtn.Location = new System.Drawing.Point(88, 856);
+            this.exportBtn.Location = new System.Drawing.Point(78, 685);
+            this.exportBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.exportBtn.Name = "exportBtn";
-            this.exportBtn.Size = new System.Drawing.Size(162, 51);
+            this.exportBtn.Size = new System.Drawing.Size(144, 41);
             this.exportBtn.TabIndex = 22;
             this.exportBtn.Text = "Export Results";
             this.exportBtn.UseVisualStyleBackColor = false;
@@ -110,9 +113,10 @@
             this.tiRTB.CornerRadius = 12;
             this.tiRTB.Font = new System.Drawing.Font("Cambria Math", 10F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tiRTB.ForeColor = System.Drawing.Color.White;
-            this.tiRTB.Location = new System.Drawing.Point(30, 399);
+            this.tiRTB.Location = new System.Drawing.Point(27, 319);
+            this.tiRTB.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tiRTB.Name = "tiRTB";
-            this.tiRTB.Size = new System.Drawing.Size(849, 161);
+            this.tiRTB.Size = new System.Drawing.Size(755, 129);
             this.tiRTB.TabIndex = 21;
             this.tiRTB.Text = "  Details of sub-problem evaluations will be displayed here...";
             // 
@@ -125,9 +129,10 @@
             this.BTFRTB.CornerRadius = 12;
             this.BTFRTB.Font = new System.Drawing.Font("Cambria Math", 10F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BTFRTB.ForeColor = System.Drawing.Color.White;
-            this.BTFRTB.Location = new System.Drawing.Point(30, 194);
+            this.BTFRTB.Location = new System.Drawing.Point(27, 155);
+            this.BTFRTB.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.BTFRTB.Name = "BTFRTB";
-            this.BTFRTB.Size = new System.Drawing.Size(849, 142);
+            this.BTFRTB.Size = new System.Drawing.Size(755, 114);
             this.BTFRTB.TabIndex = 17;
             this.BTFRTB.Text = "Backtracking, sub-problems, and fathomed nodes will be displayed here...\n\n";
             // 
@@ -137,20 +142,22 @@
             this.btnSolve.CornerRadius = 8;
             this.btnSolve.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSolve.ForeColor = System.Drawing.Color.White;
-            this.btnSolve.Location = new System.Drawing.Point(30, 68);
+            this.btnSolve.Location = new System.Drawing.Point(27, 54);
+            this.btnSolve.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSolve.Name = "btnSolve";
-            this.btnSolve.Size = new System.Drawing.Size(502, 47);
+            this.btnSolve.Size = new System.Drawing.Size(446, 38);
             this.btnSolve.TabIndex = 20;
             this.btnSolve.Text = "Solve With Branch And Bound Knapsack Algorithm";
             this.btnSolve.UseVisualStyleBackColor = false;
+            this.btnSolve.Click += new System.EventHandler(this.btnSolve_Click);
             // 
             // BTaFLbl
             // 
             this.BTaFLbl.AutoSize = true;
             this.BTaFLbl.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BTaFLbl.Location = new System.Drawing.Point(24, 140);
+            this.BTaFLbl.Location = new System.Drawing.Point(21, 112);
             this.BTaFLbl.Name = "BTaFLbl";
-            this.BTaFLbl.Size = new System.Drawing.Size(440, 32);
+            this.BTaFLbl.Size = new System.Drawing.Size(368, 28);
             this.BTaFLbl.TabIndex = 18;
             this.BTaFLbl.Text = "Branching Tree and Fathoming";
             // 
@@ -158,9 +165,9 @@
             // 
             this.SpTIlbl.AutoSize = true;
             this.SpTIlbl.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SpTIlbl.Location = new System.Drawing.Point(24, 350);
+            this.SpTIlbl.Location = new System.Drawing.Point(21, 280);
             this.SpTIlbl.Name = "SpTIlbl";
-            this.SpTIlbl.Size = new System.Drawing.Size(416, 32);
+            this.SpTIlbl.Size = new System.Drawing.Size(350, 28);
             this.SpTIlbl.TabIndex = 19;
             this.SpTIlbl.Text = "Sub-problem Table Iterations";
             // 
@@ -168,22 +175,23 @@
             // 
             this.BranchAndBoundLbl.AutoSize = true;
             this.BranchAndBoundLbl.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BranchAndBoundLbl.Location = new System.Drawing.Point(24, 11);
+            this.BranchAndBoundLbl.Location = new System.Drawing.Point(21, 9);
             this.BranchAndBoundLbl.Name = "BranchAndBoundLbl";
-            this.BranchAndBoundLbl.Size = new System.Drawing.Size(559, 32);
+            this.BranchAndBoundLbl.Size = new System.Drawing.Size(470, 28);
             this.BranchAndBoundLbl.TabIndex = 12;
             this.BranchAndBoundLbl.Text = "Branch And Bound Knapsack Algorithm";
             // 
             // BranchAndBoundKnapsackPage
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.Controls.Add(this.connectHost2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "BranchAndBoundKnapsackPage";
-            this.Size = new System.Drawing.Size(924, 940);
+            this.Size = new System.Drawing.Size(823, 752);
             this.connectHost2.ResumeLayout(false);
             this.connectHost2.PerformLayout();
             this.ResumeLayout(false);
