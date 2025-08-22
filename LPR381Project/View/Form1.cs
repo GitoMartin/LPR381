@@ -20,7 +20,7 @@ namespace LPR381Project
     {
         private Button activeButton = null;
         private Label _inputPlaceholderLabel;
-        public LPModel model;
+        public static LPModel model;
         public Form1()
         {
             InitializeComponent();

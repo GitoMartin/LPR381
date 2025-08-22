@@ -40,82 +40,97 @@ namespace LPR381Project
 
         private void btnSolve_Click(object sender, EventArgs e)
         {
-            string capacityString = model.ConstraintInequalities[0];
-            int capacity = int.Parse(capacityString.Substring(2));
-            List<Item> items = new List<Item>();
-
-            var values = model.ObjectiveFunction;
-            var weights = model.ConstraintCoefficients[0]; // Assuming weights are in the first constraint
-
-            for (int i = 0; i < values.Count; i++)
+            try
             {
-                
-                Item item = new Item
+                model = Form1.model;
+                string capacityString = model.ConstraintInequalities[0];
+                int capacity = int.Parse(capacityString.Substring(2));
+                List<Item> items = new List<Item>();
+
+                var values = model.ObjectiveFunction;
+                var weights = model.ConstraintCoefficients[0]; // Assuming weights are in the first constraint
+
+                for (int i = 0; i < values.Count; i++)
                 {
-                    Id = i + 1, // Create a 1-based ID for display
-                    Value = (int)values[i],
-                    Weight = (int)weights[i]
-                };
-                items.Add(item);
-            }
-            IEnumerable<Item> itemsEnumerable = items.AsEnumerable();
 
-            Solver solver = new Solver(itemsEnumerable, capacity);
-
-            KnapsackResult result = solver.Solve();
-            List<Item> itemSorted = solver.getItemsSorted();
+                    Item item = new Item
+                    {
+                        Id = i + 1, // Create a 1-based ID for display
+                        Value = (int)values[i],
+                        Weight = (int)weights[i]
+                    };
+                    items.Add(item);
+                }
+                IEnumerable<Item> itemsEnumerable = items.AsEnumerable();
 
 
-            var sb = new StringBuilder();
+                Solver solver = new Solver(itemsEnumerable, capacity);
 
-            sb.AppendLine("--- Best Candidate ---");
-            sb.AppendLine($"Total Value: {result.BestValue}");
-            sb.AppendLine($"Total Weight: {result.BestWeight}");
-            sb.AppendLine();
-            sb.Append("Items Taken (ID): ");
-            //sb.Append(string.Join(", ", result.BestTaken));
-            for (int i = 0; i < result.BestTaken.Length; i++)
-            {
-                if (result.BestTaken[i])
+                KnapsackResult result = solver.Solve();
+                List<Item> itemSorted = solver.getItemsSorted();
+
+
+                var sb = new StringBuilder();
+
+                sb.AppendLine("--- Best Candidate ---");
+                sb.AppendLine($"Total Value: {result.BestValue}");
+                sb.AppendLine($"Total Weight: {result.BestWeight}");
+                sb.AppendLine();
+                sb.Append("Items Taken (ID): ");
+                //sb.Append(string.Join(", ", result.BestTaken));
+                for (int i = 0; i < result.BestTaken.Length; i++)
                 {
-                    sb.Append(itemSorted[i].Id + " ");
+                    if (result.BestTaken[i])
+                    {
+                        sb.Append("x" + itemSorted[i].Id + ", ");
+                    }
+                }
+
+
+                BCRTB.Text = sb.ToString();
+
+
+
+                // Clear previous data
+                tiListView.Clear();
+
+                // 1. Add columns (headers)
+                tiListView.Columns.Add("Iter", 50);
+                tiListView.Columns.Add("Node", 50);
+                tiListView.Columns.Add("Parent", 60);
+                tiListView.Columns.Add("Level", 60);
+                tiListView.Columns.Add("Decision", 80);
+                tiListView.Columns.Add("Weight", 70);
+                tiListView.Columns.Add("Value", 70);
+                tiListView.Columns.Add("Z Value", 80);
+                tiListView.Columns.Add("Status", 100);
+                tiListView.Columns.Add("Reason", 150);
+                tiListView.Columns.Add("Path", 120);
+
+                // 2. Add rows from log
+                foreach (var entry in result.Log)
+                {
+                    var row = new ListViewItem(entry.Iteration.ToString());
+                    row.SubItems.Add(entry.NodeId.ToString());
+                    row.SubItems.Add(entry.ParentId.ToString());
+                    row.SubItems.Add(entry.Level.ToString());
+                    row.SubItems.Add(entry.Decision.ToString());
+                    row.SubItems.Add(entry.Weight.ToString());
+                    row.SubItems.Add(entry.Value.ToString());
+                    row.SubItems.Add(entry.Bound.ToString("F2")); // formatted like before
+                    row.SubItems.Add(entry.Status.ToString());
+                    row.SubItems.Add(entry.Reason.ToString());
+                    row.SubItems.Add(entry.PathBinary.ToString());
+
+                    tiListView.Items.Add(row);
                 }
             }
-
-
-            BCRTB.Text = sb.ToString();
-
-            var sbBranching = new StringBuilder();
-            // 1. Define the format string for alignment. Negative numbers mean left-align, positive mean right-align.
-            string headerFormat = "{0,-5} {1,-5} {2,-7} {3,-6} {4,-12} {5,7} {6,7} {7,10} {8,-12} {9,-20} {10,-15}";
-            string rowFormat = "{0,-5} {1,-5} {2,-7} {3,-6} {4,-12} {5,7} {6,7} {7,10:F2} {8,-12} {9,-20} {10,-15}";
-
-            // 2. Append the header
-            sbBranching.AppendLine(string.Format(headerFormat,
-                "Iter", "Node", "Parent", "Level", "Decision", "Weight", "Value", "Bound", "Status", "Reason", "Path"
-            ));
-            sbBranching.AppendLine(new string('-', 125));
-            foreach (var entry in result.Log)
+            catch (Exception ex)
             {
-                sbBranching.AppendLine(string.Format(rowFormat,
-                entry.Iteration,
-                entry.NodeId,
-                entry.ParentId,
-                entry.Level,
-                entry.Decision,
-                entry.Weight,
-                entry.Value,
-                entry.Bound,
-                entry.Status,
-                entry.Reason,
-                entry.PathBinary
-            ));
+                MessageBox.Show("An error occurred: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+
             }
-            tiRTB.Text = sbBranching.ToString();
-            
-            
-
-
         }
     }
 }
