@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Lpr381back;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,6 +20,7 @@ namespace LPR381Project
     {
         private Button activeButton = null;
         private Label _inputPlaceholderLabel;
+        public static LPModel model;
         public Form1()
         {
             InitializeComponent();
@@ -319,7 +321,7 @@ namespace LPR381Project
         private void BranchBoundKnap_Click(object sender, EventArgs e)
         {
             contentHost.Controls.Clear();
-            BranchAndBoundKnapsackPage revisedPage = new BranchAndBoundKnapsackPage();
+            BranchAndBoundKnapsackPage revisedPage = new BranchAndBoundKnapsackPage(model);
             revisedPage.Dock = DockStyle.Fill;
             contentHost.Controls.Add(revisedPage);
         }
@@ -353,7 +355,7 @@ namespace LPR381Project
         private void BranchBoundKnap_Click_1(object sender, EventArgs e)
         {
             contentHost.Controls.Clear();
-            BranchAndBoundKnapsackPage revisedPage = new BranchAndBoundKnapsackPage();
+            BranchAndBoundKnapsackPage revisedPage = new BranchAndBoundKnapsackPage(model);
             revisedPage.Dock = DockStyle.Fill;
             contentHost.Controls.Add(revisedPage);
         }
@@ -369,6 +371,33 @@ namespace LPR381Project
                 {
                     string content = System.IO.File.ReadAllText(ofd.FileName);
                     InputModelTxt.Text = content;
+                    // Create model and reader
+                    model = new LPModel();
+                    ReadWriter reader = new ReadWriter();
+
+                    // Parse file into LPModel
+                    reader.ReadFromFile(model, ofd.FileName);
+
+                    StringBuilder sb = new StringBuilder();
+
+                    // Objective
+                    sb.AppendLine($"Type: {model.Type}");
+                    sb.AppendLine($"Objective: {string.Join(", ", model.ObjectiveFunction)}");
+
+                    // Constraints
+                    sb.AppendLine("Constraints:");
+                    for (int i = 0; i < model.ConstraintCoefficients.Count; i++)
+                    {
+                        string coeffs = string.Join(", ", model.ConstraintCoefficients[i]);
+                        string rhs = model.ConstraintInequalities[i]; // stored last token
+                        sb.AppendLine($"[{coeffs}] = {rhs}");
+                    }
+
+                    // Signs
+                    sb.AppendLine($"Signs: {string.Join(", ", model.Signs)}");
+
+                    // Show in inputbox
+                    InputModelTxt1.Text = sb.ToString();
                 }
             }
         }
