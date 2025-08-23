@@ -180,6 +180,7 @@
             this.roundedButton3.TabIndex = 33;
             this.roundedButton3.Text = "Apply";
             this.roundedButton3.UseVisualStyleBackColor = false;
+            this.roundedButton3.Click += new System.EventHandler(this.roundedButton3_Click);
             // 
             // roundedButton2
             // 
@@ -194,6 +195,7 @@
             this.roundedButton2.TabIndex = 32;
             this.roundedButton2.Text = "Apply";
             this.roundedButton2.UseVisualStyleBackColor = false;
+            this.roundedButton2.Click += new System.EventHandler(this.roundedButton2_Click);
             // 
             // roundedButton1
             // 
@@ -208,6 +210,7 @@
             this.roundedButton1.TabIndex = 31;
             this.roundedButton1.Text = "Apply";
             this.roundedButton1.UseVisualStyleBackColor = false;
+            this.roundedButton1.Click += new System.EventHandler(this.roundedButton1_Click);
             // 
             // applybtn1
             // 
@@ -222,6 +225,7 @@
             this.applybtn1.TabIndex = 27;
             this.applybtn1.Text = "Apply";
             this.applybtn1.UseVisualStyleBackColor = false;
+            this.applybtn1.Click += new System.EventHandler(this.applybtn1_Click);
             // 
             // comboBox1
             // 
@@ -325,6 +329,7 @@
             this.solveDualBtn.TabIndex = 30;
             this.solveDualBtn.Text = "Solve Dual and Verify Duality";
             this.solveDualBtn.UseVisualStyleBackColor = false;
+            this.solveDualBtn.Click += new System.EventHandler(this.solveDualBtn_Click);
             // 
             // dispShadPricBtn
             // 
@@ -338,6 +343,7 @@
             this.dispShadPricBtn.TabIndex = 29;
             this.dispShadPricBtn.Text = "Display Shadow Prices";
             this.dispShadPricBtn.UseVisualStyleBackColor = false;
+            this.dispShadPricBtn.Click += new System.EventHandler(this.dispShadPricBtn_Click);
             // 
             // dualityLbl
             // 
@@ -375,6 +381,7 @@
             this.roundedButton5.TabIndex = 28;
             this.roundedButton5.Text = "Add new Constraint";
             this.roundedButton5.UseVisualStyleBackColor = false;
+            this.roundedButton5.Click += new System.EventHandler(this.roundedButton5_Click);
             // 
             // roundedButton4
             // 
@@ -388,6 +395,7 @@
             this.roundedButton4.TabIndex = 27;
             this.roundedButton4.Text = "Add new Activity";
             this.roundedButton4.UseVisualStyleBackColor = false;
+            this.roundedButton4.Click += new System.EventHandler(this.roundedButton4_Click);
             // 
             // roundedRichTextBox2
             // 
@@ -460,6 +468,7 @@
             this.showRangeBtn4.TabIndex = 26;
             this.showRangeBtn4.Text = "Show Range";
             this.showRangeBtn4.UseVisualStyleBackColor = false;
+            this.showRangeBtn4.Click += new System.EventHandler(this.showRangeBtn4_Click);
             // 
             // showRangeBtn3
             // 
@@ -473,6 +482,7 @@
             this.showRangeBtn3.TabIndex = 25;
             this.showRangeBtn3.Text = "Show Range";
             this.showRangeBtn3.UseVisualStyleBackColor = false;
+            this.showRangeBtn3.Click += new System.EventHandler(this.showRangeBtn3_Click);
             // 
             // showRangeBtn2
             // 
@@ -486,6 +496,7 @@
             this.showRangeBtn2.TabIndex = 24;
             this.showRangeBtn2.Text = "Show Range";
             this.showRangeBtn2.UseVisualStyleBackColor = false;
+            this.showRangeBtn2.Click += new System.EventHandler(this.showRangeBtn2_Click);
             // 
             // showRangeBtn1
             // 
@@ -499,6 +510,7 @@
             this.showRangeBtn1.TabIndex = 23;
             this.showRangeBtn1.Text = "Show Range";
             this.showRangeBtn1.UseVisualStyleBackColor = false;
+            this.showRangeBtn1.Click += new System.EventHandler(this.showRangeBtn1_Click);
             // 
             // RangeResTxtb
             // 
