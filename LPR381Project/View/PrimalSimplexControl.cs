@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Lpr381back;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,12 +13,15 @@ namespace LPR381Project
 {
     public partial class PrimalSimplexControl : UserControl
     {
-        public PrimalSimplexControl()
+        private LPModel _model;
+        private DualSimplex Ds;
+        public PrimalSimplexControl(LPModel model)
         {
             InitializeComponent();
             SetPlaceholder(canonicalRTB, "  Canonical Form will be displayed here... ");
             SetPlaceholder(tiRTB, "  All Tableu Iterations will be displayed here...");
-
+            this._model = model;
+            Ds = new DualSimplex(_model);
         }
         private void SetPlaceholder(RichTextBox txt, string placeholder)
         {
@@ -91,6 +95,14 @@ namespace LPR381Project
         private void tiRTB_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnSolve_Click(object sender, EventArgs e)
+        {
+            Ds.Solve();
+            canonicalRTB.Text = Ds.GetInitialCanonicalString();
+            tiRTB.Text = Ds.GetIterationsString();
+           
         }
     }
 }

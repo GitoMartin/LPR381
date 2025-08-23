@@ -50,9 +50,10 @@
             this.contentHost.Controls.Add(this.CanonicalLbl);
             this.contentHost.Controls.Add(this.TabIterLbl);
             this.contentHost.CornerRadius = 12;
-            this.contentHost.Location = new System.Drawing.Point(22, 17);
+            this.contentHost.Location = new System.Drawing.Point(20, 14);
+            this.contentHost.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.contentHost.Name = "contentHost";
-            this.contentHost.Size = new System.Drawing.Size(890, 673);
+            this.contentHost.Size = new System.Drawing.Size(791, 538);
             this.contentHost.TabIndex = 0;
             // 
             // tiRTB
@@ -64,9 +65,10 @@
             this.tiRTB.CornerRadius = 12;
             this.tiRTB.Font = new System.Drawing.Font("Cambria Math", 10F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tiRTB.ForeColor = System.Drawing.Color.White;
-            this.tiRTB.Location = new System.Drawing.Point(35, 406);
+            this.tiRTB.Location = new System.Drawing.Point(31, 325);
+            this.tiRTB.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tiRTB.Name = "tiRTB";
-            this.tiRTB.Size = new System.Drawing.Size(804, 178);
+            this.tiRTB.Size = new System.Drawing.Size(715, 142);
             this.tiRTB.TabIndex = 15;
             this.tiRTB.Text = " All product form and price out iterations will be displayed";
             // 
@@ -79,9 +81,10 @@
             this.canonicalRTB.CornerRadius = 12;
             this.canonicalRTB.Font = new System.Drawing.Font("Cambria Math", 10F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.canonicalRTB.ForeColor = System.Drawing.Color.White;
-            this.canonicalRTB.Location = new System.Drawing.Point(35, 196);
+            this.canonicalRTB.Location = new System.Drawing.Point(31, 157);
+            this.canonicalRTB.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.canonicalRTB.Name = "canonicalRTB";
-            this.canonicalRTB.Size = new System.Drawing.Size(804, 142);
+            this.canonicalRTB.Size = new System.Drawing.Size(715, 114);
             this.canonicalRTB.TabIndex = 10;
             this.canonicalRTB.Text = "  Canonical Form will be displayed here... ";
             // 
@@ -91,9 +94,10 @@
             this.exportBtn.CornerRadius = 8;
             this.exportBtn.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.exportBtn.ForeColor = System.Drawing.Color.White;
-            this.exportBtn.Location = new System.Drawing.Point(76, 612);
+            this.exportBtn.Location = new System.Drawing.Point(68, 490);
+            this.exportBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.exportBtn.Name = "exportBtn";
-            this.exportBtn.Size = new System.Drawing.Size(162, 51);
+            this.exportBtn.Size = new System.Drawing.Size(144, 41);
             this.exportBtn.TabIndex = 16;
             this.exportBtn.Text = "Export Results";
             this.exportBtn.UseVisualStyleBackColor = false;
@@ -105,20 +109,22 @@
             this.btnSolve.CornerRadius = 8;
             this.btnSolve.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSolve.ForeColor = System.Drawing.Color.White;
-            this.btnSolve.Location = new System.Drawing.Point(35, 66);
+            this.btnSolve.Location = new System.Drawing.Point(31, 53);
+            this.btnSolve.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSolve.Name = "btnSolve";
-            this.btnSolve.Size = new System.Drawing.Size(327, 47);
+            this.btnSolve.Size = new System.Drawing.Size(291, 38);
             this.btnSolve.TabIndex = 14;
             this.btnSolve.Text = "Solve With Revised Primal Simplex";
             this.btnSolve.UseVisualStyleBackColor = false;
+            this.btnSolve.Click += new System.EventHandler(this.btnSolve_Click);
             // 
             // RevisedPrimalSimpAlgoLbl
             // 
             this.RevisedPrimalSimpAlgoLbl.AutoSize = true;
             this.RevisedPrimalSimpAlgoLbl.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RevisedPrimalSimpAlgoLbl.Location = new System.Drawing.Point(29, 10);
+            this.RevisedPrimalSimpAlgoLbl.Location = new System.Drawing.Point(26, 8);
             this.RevisedPrimalSimpAlgoLbl.Name = "RevisedPrimalSimpAlgoLbl";
-            this.RevisedPrimalSimpAlgoLbl.Size = new System.Drawing.Size(479, 32);
+            this.RevisedPrimalSimpAlgoLbl.Size = new System.Drawing.Size(406, 28);
             this.RevisedPrimalSimpAlgoLbl.TabIndex = 11;
             this.RevisedPrimalSimpAlgoLbl.Text = "Revised Primal Simplex Algorithm";
             // 
@@ -126,9 +132,9 @@
             // 
             this.CanonicalLbl.AutoSize = true;
             this.CanonicalLbl.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CanonicalLbl.Location = new System.Drawing.Point(29, 136);
+            this.CanonicalLbl.Location = new System.Drawing.Point(26, 109);
             this.CanonicalLbl.Name = "CanonicalLbl";
-            this.CanonicalLbl.Size = new System.Drawing.Size(231, 32);
+            this.CanonicalLbl.Size = new System.Drawing.Size(194, 28);
             this.CanonicalLbl.TabIndex = 12;
             this.CanonicalLbl.Text = "Canonical Form";
             // 
@@ -136,19 +142,20 @@
             // 
             this.TabIterLbl.AutoSize = true;
             this.TabIterLbl.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TabIterLbl.Location = new System.Drawing.Point(29, 351);
+            this.TabIterLbl.Location = new System.Drawing.Point(26, 281);
             this.TabIterLbl.Name = "TabIterLbl";
-            this.TabIterLbl.Size = new System.Drawing.Size(536, 32);
+            this.TabIterLbl.Size = new System.Drawing.Size(451, 28);
             this.TabIterLbl.TabIndex = 13;
             this.TabIterLbl.Text = "Product Form and Price Out Iterations";
             // 
             // RevisedPrimalSimplexPage
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.contentHost);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "RevisedPrimalSimplexPage";
-            this.Size = new System.Drawing.Size(1200, 724);
+            this.Size = new System.Drawing.Size(1067, 579);
             this.Load += new System.EventHandler(this.RevisedPrimalSimplexPage_Load);
             this.contentHost.ResumeLayout(false);
             this.contentHost.PerformLayout();

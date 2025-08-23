@@ -25,7 +25,7 @@ namespace LPR381Project
         {
             InitializeComponent();
             contentHost.AutoScroll = true;
-            var primalControl = new PrimalSimplexControl();
+            var primalControl = new PrimalSimplexControl(model);
             primalControl.Dock = DockStyle.Fill;
             contentHost.Controls.Clear();
             contentHost.Controls.Add(primalControl);
@@ -289,7 +289,7 @@ namespace LPR381Project
         private void RevisedPrimalSimplex_Click(object sender, EventArgs e)
         {
             contentHost.Controls.Clear();
-            RevisedPrimalSimplexPage revisedPage = new RevisedPrimalSimplexPage();
+            RevisedPrimalSimplexPage revisedPage = new RevisedPrimalSimplexPage(model);
             revisedPage.Dock = DockStyle.Fill;
             contentHost.Controls.Add(revisedPage);
         }
@@ -297,7 +297,7 @@ namespace LPR381Project
         private void PrimalSimplex_Click(object sender, EventArgs e)
         {
             contentHost.Controls.Clear();
-            PrimalSimplexControl revisedPage = new PrimalSimplexControl();
+            PrimalSimplexControl revisedPage = new PrimalSimplexControl(model);
             revisedPage.Dock = DockStyle.Fill;
             contentHost.Controls.Add(revisedPage);
         }
