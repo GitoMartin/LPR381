@@ -47,10 +47,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller\Knapsack\Solver.cs" />
+    <Compile Include="Controller\Primal revised\Revised1primal.cs" />
+    <Compile Include="Controller\Primal\DualSimplex.cs" />
     <Compile Include="Model\Knapsack\Item.cs" />
     <Compile Include="Model\Knapsack\KnapsackResult.cs" />
     <Compile Include="Model\Knapsack\LogEntry.cs" />
     <Compile Include="Model\Knapsack\Node.cs" />
+    <Compile Include="Model\LPModel.cs" />
     <Compile Include="View\BranchAndBoundKnapsackPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -75,7 +78,6 @@
     <Compile Include="View\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Model\LPModel.cs" />
     <Compile Include="View\PlaceholderRichTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
