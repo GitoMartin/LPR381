@@ -17,8 +17,8 @@ namespace LPR381Project.Controller
         public SensitivityAnalysisController(LPModel lpModel)
         {
             this.lpModel = lpModel;
-            PrimalSimplex primalSimplex = new PrimalSimplex(lpModel);
-            this.finalTableau = primalSimplex.Solve().Last();
+            DualSimplex dualSimplex = new DualSimplex(lpModel);
+            this.finalTableau = dualSimplex.Solve().Last();
         }
 
         public string GetNonBasicVariableRange(string variableName)
@@ -70,7 +70,13 @@ namespace LPR381Project.Controller
 
             for (int i = 0; i < finalTableau.Count - 1; i++)
             {
-                double val = finalTableau[i][lpModel.ObjectiveFunction.Count + constraintIndex];
+                int columnIndexToAccess = lpModel.ObjectiveFunction.Count + constraintIndex;
+                if (columnIndexToAccess >= finalTableau[i].Count)
+                {
+                    // This indicates an issue with tableau structure or indexing
+                    throw new IndexOutOfRangeException($"Column index {columnIndexToAccess} is out of bounds for tableau row {i}. Tableau row has {finalTableau[i].Count} columns. Final Tableau dimensions: {finalTableau.Count} rows x {(finalTableau.Count > 0 ? finalTableau[0].Count : 0)} columns.");
+                }
+                double val = finalTableau[i][columnIndexToAccess];
                 double rhs = finalTableau[i].Last();
 
                 if (val > 0)
