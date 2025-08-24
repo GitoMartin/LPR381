@@ -20,6 +20,9 @@ namespace Lpr381back
         public string Type { get => type; set => type = value; }
         public List<string> Signs { get => signs; set => signs = value; }
         public List<List<double>> ConstraintCoefficients { get => constraintCoefficients; set => constraintCoefficients = value; }
+        
+        public List<double> Rhs { get; set; } = new List<double>();
+
         public void showLP()
         {
             string line = " ";

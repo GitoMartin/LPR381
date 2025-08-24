@@ -313,7 +313,7 @@ namespace LPR381Project
         private void CuttingPlane_Click(object sender, EventArgs e)
         {
             contentHost.Controls.Clear();
-            CuttingPlanePage revisedPage = new CuttingPlanePage();
+            CuttingPlanePage revisedPage = new CuttingPlanePage(model);
             revisedPage.Dock = DockStyle.Fill;
             contentHost.Controls.Add(revisedPage);
         }
@@ -347,7 +347,7 @@ namespace LPR381Project
         private void CuttingPlane_Click_1(object sender, EventArgs e)
         {
             contentHost.Controls.Clear();
-            CuttingPlanePage revisedPage = new CuttingPlanePage();
+            CuttingPlanePage revisedPage = new CuttingPlanePage(model);
             revisedPage.Dock = DockStyle.Fill;
             contentHost.Controls.Add(revisedPage);
         }

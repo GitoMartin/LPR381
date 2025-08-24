@@ -47,6 +47,8 @@ namespace Lpr381back
                 // Last token = inequality
                 model.ConstraintInequalities.Add(parts[parts.Length - 1]);
 
+                
+
                 // Rest = coefficients
                 var rowCoefficients = new List<double>();
                 for (int k = 0; k < parts.Length - 1; k++)
@@ -64,6 +66,14 @@ namespace Lpr381back
                         
                 }
                 model.ConstraintCoefficients.Add(rowCoefficients);
+                
+            }
+
+            // RHS
+
+            foreach (var constraintInequalities in model.ConstraintInequalities)
+            {
+                model.Rhs.Add(double.Parse(constraintInequalities.Substring(2)));
             }
 
             // ===== LAST LINE =====
