@@ -21,7 +21,7 @@ namespace LPR381Project
             SetPlaceholder(canonicalRTB, "  Canonical Form will be displayed here... ");
             SetPlaceholder(tiRTB, "  All Tableu Iterations will be displayed here...");
             this._model = model;
-            Ds = new DualSimplex(_model);
+            
         }
         private void SetPlaceholder(RichTextBox txt, string placeholder)
         {
@@ -99,10 +99,13 @@ namespace LPR381Project
 
         private void btnSolve_Click(object sender, EventArgs e)
         {
+            _model = Form1.model;   
+            Ds = new DualSimplex(_model);
             Ds.Solve();
             canonicalRTB.Text = Ds.GetInitialCanonicalString();
             tiRTB.Text = Ds.GetIterationsString();
-           
+           canonicalRTB.ForeColor = Color.White;
+            tiRTB.ForeColor = Color.White;
         }
     }
 }

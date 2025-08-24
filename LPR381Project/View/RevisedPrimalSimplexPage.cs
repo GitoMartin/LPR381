@@ -22,7 +22,7 @@ namespace LPR381Project
         public RevisedPrimalSimplexPage(LPModel model)
         {
             this.model = model;
-            solver = new RevisedSimplexSolver(model);
+            
             InitializeComponent();
             
         }
@@ -57,6 +57,8 @@ namespace LPR381Project
 
         private void btnSolve_Click(object sender, EventArgs e)
         {
+            model = Form1.model;
+            solver = new RevisedSimplexSolver(model);
             LpResult res = solver.Solve();
 
             var sb = new System.Text.StringBuilder();
