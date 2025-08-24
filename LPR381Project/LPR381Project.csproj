@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -50,13 +50,14 @@
     <Compile Include="Controller\Knapsack\Solver.cs" />
     <Compile Include="Controller\Primal revised\Revised1primal.cs" />
     <Compile Include="Controller\Primal\DualSimplex.cs" />
+    <Compile Include="Controller\Primal\PrimalSimplex.cs" />
     <Compile Include="Controller\SensitivityAnalysisController.cs" />
-    <Compile Include="Model\CuttingPlane\TableauViewer.cs" />
     <Compile Include="Model\Knapsack\Item.cs" />
     <Compile Include="Model\Knapsack\KnapsackResult.cs" />
     <Compile Include="Model\Knapsack\LogEntry.cs" />
     <Compile Include="Model\Knapsack\Node.cs" />
     <Compile Include="Model\LPModel.cs" />
+    <Compile Include="Model\RangeResult.cs" />
     <Compile Include="View\BranchAndBoundKnapsackPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
