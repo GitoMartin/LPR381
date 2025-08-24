@@ -48,7 +48,7 @@ namespace LPR381Project
 
                 if (sfd.ShowDialog() == DialogResult.OK)
                 {
-                    System.IO.File.WriteAllText(sfd.FileName, BTFRTB.Text);
+                    System.IO.File.WriteAllText(sfd.FileName, roundedRichTextBox1.Text);
                     MessageBox.Show("Results exported successfully!", "Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }

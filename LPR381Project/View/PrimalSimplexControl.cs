@@ -104,7 +104,8 @@ namespace LPR381Project
             Ds.Solve();
             canonicalRTB.Text = Ds.GetInitialCanonicalString();
             tiRTB.Text = Ds.GetIterationsString();
-           
+           canonicalRTB.ForeColor = Color.White;
+            tiRTB.ForeColor = Color.White;
         }
     }
 }
