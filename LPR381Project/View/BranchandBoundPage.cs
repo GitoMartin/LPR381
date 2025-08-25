@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Lpr381back;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -41,6 +42,13 @@ namespace LPR381Project
         private void connectHost2_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void btnSolve_Click(object sender, EventArgs e)
+        {
+            BranchAndBoundSolver BB = new BranchAndBoundSolver(Form1.model);
+            tiRTB.Text = BB.ShowAllNodes();
+            bestCandidTxtb.Text = BB.ShowBestSolution();
         }
     }
 }

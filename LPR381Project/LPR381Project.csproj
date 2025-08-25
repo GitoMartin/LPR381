@@ -52,6 +52,7 @@
     <Compile Include="Controller\Primal\DualSimplex.cs" />
     <Compile Include="Controller\Primal\PrimalSimplex.cs" />
     <Compile Include="Controller\SensitivityAnalysisController.cs" />
+    <Compile Include="Model\Branch and bound.cs" />
     <Compile Include="Model\Knapsack\Item.cs" />
     <Compile Include="Model\Knapsack\KnapsackResult.cs" />
     <Compile Include="Model\Knapsack\LogEntry.cs" />

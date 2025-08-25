@@ -52,14 +52,45 @@ namespace Lpr381back
         }
         public LPModel Clone()
         {
-            return new LPModel
+            var copy = new LPModel
             {
-                Type = this.Type,
                 ObjectiveFunction = new List<double>(this.ObjectiveFunction),
                 ConstraintCoefficients = this.ConstraintCoefficients
-                    .Select(row => new List<double>(row)).ToList(),
-                ConstraintInequalities = new List<string>(this.ConstraintInequalities)
+                    .Select(row => new List<double>(row))
+                    .ToList(),
+                ConstraintInequalities = new List<string>(this.ConstraintInequalities),
+                Signs = this.Signs != null ? new List<string>(this.Signs) : null
             };
+
+            // Ensure binary constraints xj <= 1 are always present
+            if (copy.Signs != null)
+            {
+                for (int j = 0; j < copy.Signs.Count; j++)
+                {
+                    if (copy.Signs[j].Equals("Bin", StringComparison.OrdinalIgnoreCase) ||
+                        copy.Signs[j].Equals("Binary", StringComparison.OrdinalIgnoreCase))
+                    {
+                        bool alreadyHas = copy.ConstraintCoefficients
+                            .Select((row, idx) => new { row, idx })
+                            .Any(c =>
+                                copy.ConstraintInequalities[c.idx].StartsWith("<=") &&
+                                Math.Abs(c.row[j] - 1.0) < 1e-7 &&
+                                c.row.Count(v => Math.Abs(v) > 1e-7) == 1
+                            );
+
+                        if (!alreadyHas)
+                        {
+                            var binRow = Enumerable.Range(0, copy.ObjectiveFunction.Count)
+                                                   .Select(k => k == j ? 1.0 : 0.0)
+                                                   .ToList();
+                            copy.ConstraintCoefficients.Add(binRow);
+                            copy.ConstraintInequalities.Add("<=1");
+                        }
+                    }
+                }
+            }
+
+            return copy;
         }
         public LPModel DeepClone()
         {

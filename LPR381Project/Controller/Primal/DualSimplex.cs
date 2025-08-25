@@ -8,7 +8,7 @@ using System.Globalization;
 
     namespace Lpr381back
     {
-    internal class DualSimplex
+    public class DualSimplex
     {
         private readonly LPModel _model;
         private readonly List<List<List<double>>> _iterations;
@@ -30,16 +30,35 @@ using System.Globalization;
             var tableau = BuildCanonicalForm();
             _iterations.Add(CloneTableau(tableau));
 
-            while (!IsOptimal(tableau))
+            // if all RHS >= 0 → use primal simplex
+            bool feasible = tableau.Take(tableau.Count - 1).All(row => row.Last() >= -Eps);
+
+            if (feasible)
             {
-                int pivotCol = ChooseEnteringVariable(tableau);
-                int pivotRow = ChooseLeavingVariable(tableau, pivotCol);
-                Pivot(tableau, pivotRow, pivotCol);
-                _iterations.Add(CloneTableau(tableau));
+                // primal simplex loop
+                while (!IsOptimal(tableau))
+                {
+                    int pivotCol = ChooseEnteringVariable(tableau);
+                    int pivotRow = ChooseLeavingVariable(tableau, pivotCol);
+                    Pivot(tableau, pivotRow, pivotCol);
+                    _iterations.Add(CloneTableau(tableau));
+                }
+            }
+            else
+            {
+                // dual simplex loop
+                while (!IsDualFeasible(tableau))
+                {
+                    int pivotRow = ChooseLeavingRowDual(tableau);   // row with most negative RHS
+                    int pivotCol = ChooseEnteringColDual(tableau, pivotRow);
+                    Pivot(tableau, pivotRow, pivotCol);
+                    _iterations.Add(CloneTableau(tableau));
+                }
             }
 
             return _iterations;
         }
+
 
         // Show the optimal tableau from the *last* Solve() call
 
@@ -68,69 +87,83 @@ using System.Globalization;
         // Build tableau (keeps your handling; adds x_j <= 1 rows for Bin vars)
         private List<List<double>> BuildCanonicalForm()
         {
-            int m = _model.ConstraintCoefficients.Count;
             int n = _model.ObjectiveFunction.Count;
 
-            var binIdx = Enumerable.Range(0, n)
-                .Where(j => _model.Signs != null && j < _model.Signs.Count &&
-                            (_model.Signs[j]?.Equals("Bin", StringComparison.OrdinalIgnoreCase) == true ||
-                             _model.Signs[j]?.Equals("Binary", StringComparison.OrdinalIgnoreCase) == true))
-                .ToList();
+            // 1) Normalize all user constraints to <= b
+            var A_norm = new List<List<double>>();
+            var b_norm = new List<double>();
 
-            int totalConstraints = m + binIdx.Count;
+            for (int i = 0; i < _model.ConstraintCoefficients.Count; i++)
+            {
+                var coeffs = _model.ConstraintCoefficients[i].ToList();
+                string ineqRaw = _model.ConstraintInequalities[i]?.Trim() ?? "";
+                // accept formats like "<=4", "<= 4", ">=10", "=3"
+                string op;
+                double rhs;
+
+                // find operator
+                if (ineqRaw.StartsWith("<="))
+                {
+                    op = "<=";
+                    rhs = double.Parse(ineqRaw.Substring(2).Trim(), System.Globalization.CultureInfo.InvariantCulture);
+                    A_norm.Add(coeffs);
+                    b_norm.Add(rhs);
+                }
+                else if (ineqRaw.StartsWith(">="))
+                {
+                    op = ">=";
+                    rhs = double.Parse(ineqRaw.Substring(2).Trim(), System.Globalization.CultureInfo.InvariantCulture);
+                    // flip: a·x >= b  =>  (-a)·x <= -b
+                    var flipped = coeffs.Select(c => -c).ToList();
+                    A_norm.Add(flipped);
+                    b_norm.Add(-rhs);
+                }
+                else if (ineqRaw.StartsWith("="))
+                {
+                    op = "=";
+                    rhs = double.Parse(ineqRaw.Substring(1).Trim(), System.Globalization.CultureInfo.InvariantCulture);
+                    // add two rows: a·x <= b  AND  (-a)·x <= -b
+                    A_norm.Add(coeffs);
+                    b_norm.Add(rhs);
+                    var flipped = coeffs.Select(c => -c).ToList();
+                    A_norm.Add(flipped);
+                    b_norm.Add(-rhs);
+                }
+                else
+                {
+                    throw new Exception($"Invalid inequality format: '{ineqRaw}'. Expected one of <=, >=, = followed by RHS.");
+                }
+            }
+
+            
+
+            int m = A_norm.Count; // total normalized (<=) constraints
+
+            // 3) Build tableau with identity slacks
             var T = new List<List<double>>();
 
-            // Constraint rows + slack/surplus block + RHS
             for (int i = 0; i < m; i++)
             {
-                var row = new List<double>(_model.ConstraintCoefficients[i]);
+                var row = new List<double>(A_norm[i]);
 
-                string ineq = _model.ConstraintInequalities[i].Trim();
-                double rhs;
-                if (ineq.StartsWith("<="))
-                    rhs = double.Parse(ineq.Substring(2), CultureInfo.InvariantCulture);
-                else if (ineq.StartsWith(">="))
-                    rhs = double.Parse(ineq.Substring(2), CultureInfo.InvariantCulture);
-                else if (ineq.StartsWith("="))
-                    rhs = double.Parse(ineq.Substring(1), CultureInfo.InvariantCulture);
-                else
-                    throw new Exception($"Invalid inequality format: {ineq}");
+                // slack block: identity m×m
+                for (int s = 0; s < m; s++)
+                    row.Add(s == i ? 1.0 : 0.0);
 
-                for (int s = 0; s < totalConstraints; s++)
-                {
-                    double val = 0.0;
-                    if (s == i)
-                    {
-                        if (ineq.StartsWith("<=")) val = 1.0;      // slack
-                        else if (ineq.StartsWith(">=")) val = -1.0; // surplus
-                    }
-                    row.Add(val);
-                }
-
-                row.Add(rhs);
+                // RHS
+                row.Add(b_norm[i]);
                 T.Add(row);
             }
 
-            // Binary constraints x_j <= 1
-            for (int b = 0; b < binIdx.Count; b++)
-            {
-                int j = binIdx[b];
-                var row = new List<double>();
-                for (int k = 0; k < n; k++) row.Add(k == j ? 1.0 : 0.0);
-                for (int s = 0; s < totalConstraints; s++)
-                    row.Add(s == (m + b) ? 1.0 : 0.0);
-                row.Add(1.0);
-                T.Add(row);
-            }
-
-            // Objective row (use -c for max)
+            // 4) Objective (maximize): use -c, then zeros for slacks, then 0 RHS
             var obj = new List<double>(_model.ObjectiveFunction.Select(c => -c));
-            obj.AddRange(Enumerable.Repeat(0.0, totalConstraints));
+            obj.AddRange(Enumerable.Repeat(0.0, m)); // slacks in objective
             obj.Add(0.0);
             T.Add(obj);
 
             return T;
         }
+
 
         // Optimal if last row reduced costs >= 0
         private bool IsOptimal(List<List<double>> T)
@@ -385,8 +418,56 @@ using System.Globalization;
             sb.AppendLine(new string('=', w.Sum()));
             return sb.ToString();
         }
+        // Dual feasible if all RHS ≥ 0
+        private bool IsDualFeasible(List<List<double>> T)
+        {
+            return T.Take(T.Count - 1).All(row => row.Last() >= -Eps);
+        }
+
+        // Pick leaving row for dual simplex (row with most negative RHS)
+        private int ChooseLeavingRowDual(List<List<double>> T)
+        {
+            int row = -1;
+            double mostNeg = -Eps;
+            for (int i = 0; i < T.Count - 1; i++)
+            {
+                double rhs = T[i].Last();
+                if (rhs < mostNeg)
+                {
+                    mostNeg = rhs;
+                    row = i;
+                }
+            }
+            if (row == -1) throw new Exception("No leaving row found in dual simplex.");
+            return row;
+        }
+
+        // Pick entering col using dual ratio test: min |zj/ aij| where aij < 0
+        private int ChooseEnteringColDual(List<List<double>> T, int row)
+        {
+            int col = -1;
+            double best = double.PositiveInfinity;
+
+            var z = T.Last();
+            for (int j = 0; j < z.Count - 1; j++)
+            {
+                double a = T[row][j];
+                if (a < -Eps) // only consider negative coefficients
+                {
+                    double ratio = Math.Abs(z[j] / a);
+                    if (ratio < best)
+                    {
+                        best = ratio;
+                        col = j;
+                    }
+                }
+            }
+            if (col == -1) throw new Exception("No entering column found in dual simplex.");
+            return col;
+        }
+
     }
-    }
+}
 
 
 
