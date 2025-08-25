@@ -13,12 +13,13 @@ namespace LPR381Project
 {
     public partial class SensitivityAnalysis : UserControl
     {
-        private SensitivityAnalysisController controller;
+
+         private SensitivityAnalysisController controller;
 
         public SensitivityAnalysis()
         {
             InitializeComponent();
-            // Pass null for the final tableau for now
+            Pass null for the final tableau for now
             controller = new SensitivityAnalysisController(Form1.model, null);
         }
 

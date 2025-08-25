@@ -49,6 +49,7 @@
     <Compile Include="Controller\Knapsack\Solver.cs" />
     <Compile Include="Controller\Primal revised\Revised1primal.cs" />
     <Compile Include="Controller\Primal\DualSimplex.cs" />
+    <Compile Include="Controller\Simplex Branch\Branch and bound.cs" />
     <Compile Include="Model\Knapsack\Item.cs" />
     <Compile Include="Model\Knapsack\KnapsackResult.cs" />
     <Compile Include="Model\Knapsack\LogEntry.cs" />
@@ -111,6 +112,7 @@
     <Compile Include="View\SensitivityAnalysis.Designer.cs">
       <DependentUpon>SensitivityAnalysis.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\SensitivityAnalysisController.cs" />
     <EmbeddedResource Include="View\BranchAndBoundKnapsackPage.resx">
       <DependentUpon>BranchAndBoundKnapsackPage.cs</DependentUpon>
     </EmbeddedResource>
