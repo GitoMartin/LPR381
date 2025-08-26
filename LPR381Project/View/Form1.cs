@@ -339,11 +339,16 @@ namespace LPR381Project
         private void SensitivityAnalysis_Click(object sender, EventArgs e)
         {
             contentHost.Controls.Clear();
-            
+            try
+            {
                 SensitivityAnalysis saPage = new SensitivityAnalysis(model);
                 saPage.Dock = DockStyle.Fill;
                 contentHost.Controls.Add(saPage);
-            
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Model not yet loaded");
+            }
         }
 
         private void CuttingPlane_Click_1(object sender, EventArgs e)

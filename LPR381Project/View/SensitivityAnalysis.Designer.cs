@@ -31,18 +31,19 @@
             this.SensAnaTbl = new System.Windows.Forms.TableLayoutPanel();
             this.sensAnalbl = new System.Windows.Forms.Label();
             this.ApplyChangesPanel = new LPR381Project.RoundedPanel();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
-            this.roundedButton3 = new LPR381Project.RoundedButton();
-            this.roundedButton2 = new LPR381Project.RoundedButton();
-            this.roundedButton1 = new LPR381Project.RoundedButton();
-            this.applybtn1 = new LPR381Project.RoundedButton();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.comboBox4 = new System.Windows.Forms.ComboBox();
+            this.textBoxResult = new LPR381Project.RoundedRichTextBox();
+            this.numericUpDownNonBasic = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownNBV = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownConstraint = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownBasic = new System.Windows.Forms.NumericUpDown();
+            this.buttonApplyNBV = new LPR381Project.RoundedButton();
+            this.buttonApplyConstraint = new LPR381Project.RoundedButton();
+            this.buttonApplyBasic = new LPR381Project.RoundedButton();
+            this.buttonApplyNonBasic = new LPR381Project.RoundedButton();
+            this.comboBoxBasicVar2 = new System.Windows.Forms.ComboBox();
+            this.comboBoxConstraintRHS2 = new System.Windows.Forms.ComboBox();
+            this.comboBoxVarInNBV2 = new System.Windows.Forms.ComboBox();
+            this.comboBoxNonBasicVar2 = new System.Windows.Forms.ComboBox();
             this.applychangesLbl = new System.Windows.Forms.Label();
             this.DualityPanel = new LPR381Project.RoundedPanel();
             this.roundedRichTextBox3 = new LPR381Project.RoundedRichTextBox();
@@ -57,6 +58,10 @@
             this.addnewActtxtb = new LPR381Project.RoundedRichTextBox();
             this.addnewelLbl = new System.Windows.Forms.Label();
             this.RangeAnalysisPanel = new LPR381Project.RoundedPanel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.buttonShowRangeNBV = new LPR381Project.RoundedButton();
             this.buttonShowRangeConstraint = new LPR381Project.RoundedButton();
             this.buttonShowRangeBasic = new LPR381Project.RoundedButton();
@@ -67,16 +72,12 @@
             this.comboBoxVarInNBV = new System.Windows.Forms.ComboBox();
             this.comboBoxNonBasicVar = new System.Windows.Forms.ComboBox();
             this.RangeAnaLbl = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.SensAnaTbl.SuspendLayout();
             this.ApplyChangesPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownNonBasic)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownNBV)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownConstraint)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownBasic)).BeginInit();
             this.DualityPanel.SuspendLayout();
             this.AddNewElementsPanel.SuspendLayout();
             this.RangeAnalysisPanel.SuspendLayout();
@@ -115,18 +116,19 @@
             // ApplyChangesPanel
             // 
             this.ApplyChangesPanel.BackColor = System.Drawing.Color.White;
-            this.ApplyChangesPanel.Controls.Add(this.numericUpDown1);
-            this.ApplyChangesPanel.Controls.Add(this.numericUpDown4);
-            this.ApplyChangesPanel.Controls.Add(this.numericUpDown3);
-            this.ApplyChangesPanel.Controls.Add(this.numericUpDown2);
-            this.ApplyChangesPanel.Controls.Add(this.roundedButton3);
-            this.ApplyChangesPanel.Controls.Add(this.roundedButton2);
-            this.ApplyChangesPanel.Controls.Add(this.roundedButton1);
-            this.ApplyChangesPanel.Controls.Add(this.applybtn1);
-            this.ApplyChangesPanel.Controls.Add(this.comboBox1);
-            this.ApplyChangesPanel.Controls.Add(this.comboBox2);
-            this.ApplyChangesPanel.Controls.Add(this.comboBox3);
-            this.ApplyChangesPanel.Controls.Add(this.comboBox4);
+            this.ApplyChangesPanel.Controls.Add(this.textBoxResult);
+            this.ApplyChangesPanel.Controls.Add(this.numericUpDownNonBasic);
+            this.ApplyChangesPanel.Controls.Add(this.numericUpDownNBV);
+            this.ApplyChangesPanel.Controls.Add(this.numericUpDownConstraint);
+            this.ApplyChangesPanel.Controls.Add(this.numericUpDownBasic);
+            this.ApplyChangesPanel.Controls.Add(this.buttonApplyNBV);
+            this.ApplyChangesPanel.Controls.Add(this.buttonApplyConstraint);
+            this.ApplyChangesPanel.Controls.Add(this.buttonApplyBasic);
+            this.ApplyChangesPanel.Controls.Add(this.buttonApplyNonBasic);
+            this.ApplyChangesPanel.Controls.Add(this.comboBoxBasicVar2);
+            this.ApplyChangesPanel.Controls.Add(this.comboBoxConstraintRHS2);
+            this.ApplyChangesPanel.Controls.Add(this.comboBoxVarInNBV2);
+            this.ApplyChangesPanel.Controls.Add(this.comboBoxNonBasicVar2);
             this.ApplyChangesPanel.Controls.Add(this.applychangesLbl);
             this.ApplyChangesPanel.CornerRadius = 12;
             this.ApplyChangesPanel.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -136,145 +138,201 @@
             this.ApplyChangesPanel.Size = new System.Drawing.Size(362, 303);
             this.ApplyChangesPanel.TabIndex = 0;
             // 
-            // numericUpDown1
+            // textBoxResult
             // 
-            this.numericUpDown1.ForeColor = System.Drawing.Color.Silver;
-            this.numericUpDown1.Location = new System.Drawing.Point(202, 67);
-            this.numericUpDown1.Margin = new System.Windows.Forms.Padding(2);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(80, 20);
-            this.numericUpDown1.TabIndex = 38;
-            this.numericUpDown1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBoxResult.BackColor = System.Drawing.SystemColors.Control;
+            this.textBoxResult.BorderColor = System.Drawing.Color.LightGray;
+            this.textBoxResult.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBoxResult.BorderThickness = 1;
+            this.textBoxResult.CornerRadius = 12;
+            this.textBoxResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxResult.ForeColor = System.Drawing.Color.Black;
+            this.textBoxResult.Location = new System.Drawing.Point(16, 222);
+            this.textBoxResult.Margin = new System.Windows.Forms.Padding(2);
+            this.textBoxResult.Name = "textBoxResult";
+            this.textBoxResult.Size = new System.Drawing.Size(301, 69);
+            this.textBoxResult.TabIndex = 31;
+            this.textBoxResult.Text = "  Apply Result...";
             // 
-            // numericUpDown4
+            // numericUpDownNonBasic
             // 
-            this.numericUpDown4.ForeColor = System.Drawing.Color.Silver;
-            this.numericUpDown4.Location = new System.Drawing.Point(202, 198);
-            this.numericUpDown4.Margin = new System.Windows.Forms.Padding(2);
-            this.numericUpDown4.Name = "numericUpDown4";
-            this.numericUpDown4.Size = new System.Drawing.Size(80, 20);
-            this.numericUpDown4.TabIndex = 37;
-            this.numericUpDown4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numericUpDownNonBasic.ForeColor = System.Drawing.Color.Silver;
+            this.numericUpDownNonBasic.Location = new System.Drawing.Point(202, 67);
+            this.numericUpDownNonBasic.Margin = new System.Windows.Forms.Padding(2);
+            this.numericUpDownNonBasic.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numericUpDownNonBasic.Minimum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            -2147483648});
+            this.numericUpDownNonBasic.Name = "numericUpDownNonBasic";
+            this.numericUpDownNonBasic.Size = new System.Drawing.Size(80, 20);
+            this.numericUpDownNonBasic.TabIndex = 38;
+            this.numericUpDownNonBasic.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // numericUpDown3
+            // numericUpDownNBV
             // 
-            this.numericUpDown3.ForeColor = System.Drawing.Color.Silver;
-            this.numericUpDown3.Location = new System.Drawing.Point(202, 154);
-            this.numericUpDown3.Margin = new System.Windows.Forms.Padding(2);
-            this.numericUpDown3.Name = "numericUpDown3";
-            this.numericUpDown3.Size = new System.Drawing.Size(80, 20);
-            this.numericUpDown3.TabIndex = 36;
-            this.numericUpDown3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numericUpDownNBV.ForeColor = System.Drawing.Color.Silver;
+            this.numericUpDownNBV.Location = new System.Drawing.Point(202, 198);
+            this.numericUpDownNBV.Margin = new System.Windows.Forms.Padding(2);
+            this.numericUpDownNBV.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numericUpDownNBV.Minimum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            -2147483648});
+            this.numericUpDownNBV.Name = "numericUpDownNBV";
+            this.numericUpDownNBV.Size = new System.Drawing.Size(80, 20);
+            this.numericUpDownNBV.TabIndex = 37;
+            this.numericUpDownNBV.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // numericUpDown2
+            // numericUpDownConstraint
             // 
-            this.numericUpDown2.ForeColor = System.Drawing.Color.Silver;
-            this.numericUpDown2.Location = new System.Drawing.Point(202, 115);
-            this.numericUpDown2.Margin = new System.Windows.Forms.Padding(2);
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(80, 20);
-            this.numericUpDown2.TabIndex = 35;
-            this.numericUpDown2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numericUpDownConstraint.ForeColor = System.Drawing.Color.Silver;
+            this.numericUpDownConstraint.Location = new System.Drawing.Point(202, 154);
+            this.numericUpDownConstraint.Margin = new System.Windows.Forms.Padding(2);
+            this.numericUpDownConstraint.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numericUpDownConstraint.Minimum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            -2147483648});
+            this.numericUpDownConstraint.Name = "numericUpDownConstraint";
+            this.numericUpDownConstraint.Size = new System.Drawing.Size(80, 20);
+            this.numericUpDownConstraint.TabIndex = 36;
+            this.numericUpDownConstraint.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // roundedButton3
+            // numericUpDownBasic
             // 
-            this.roundedButton3.BackColor = System.Drawing.Color.Orange;
-            this.roundedButton3.CornerRadius = 8;
-            this.roundedButton3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.roundedButton3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.roundedButton3.ForeColor = System.Drawing.Color.White;
-            this.roundedButton3.Location = new System.Drawing.Point(288, 190);
-            this.roundedButton3.Margin = new System.Windows.Forms.Padding(2);
-            this.roundedButton3.Name = "roundedButton3";
-            this.roundedButton3.Size = new System.Drawing.Size(62, 25);
-            this.roundedButton3.TabIndex = 33;
-            this.roundedButton3.Text = "Apply";
-            this.roundedButton3.UseVisualStyleBackColor = false;
+            this.numericUpDownBasic.ForeColor = System.Drawing.Color.Silver;
+            this.numericUpDownBasic.Location = new System.Drawing.Point(202, 115);
+            this.numericUpDownBasic.Margin = new System.Windows.Forms.Padding(2);
+            this.numericUpDownBasic.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numericUpDownBasic.Minimum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            -2147483648});
+            this.numericUpDownBasic.Name = "numericUpDownBasic";
+            this.numericUpDownBasic.Size = new System.Drawing.Size(80, 20);
+            this.numericUpDownBasic.TabIndex = 35;
+            this.numericUpDownBasic.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // roundedButton2
+            // buttonApplyNBV
             // 
-            this.roundedButton2.BackColor = System.Drawing.Color.Orange;
-            this.roundedButton2.CornerRadius = 8;
-            this.roundedButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.roundedButton2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.roundedButton2.ForeColor = System.Drawing.Color.White;
-            this.roundedButton2.Location = new System.Drawing.Point(288, 149);
-            this.roundedButton2.Margin = new System.Windows.Forms.Padding(2);
-            this.roundedButton2.Name = "roundedButton2";
-            this.roundedButton2.Size = new System.Drawing.Size(62, 25);
-            this.roundedButton2.TabIndex = 32;
-            this.roundedButton2.Text = "Apply";
-            this.roundedButton2.UseVisualStyleBackColor = false;
+            this.buttonApplyNBV.BackColor = System.Drawing.Color.Orange;
+            this.buttonApplyNBV.CornerRadius = 8;
+            this.buttonApplyNBV.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonApplyNBV.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonApplyNBV.ForeColor = System.Drawing.Color.White;
+            this.buttonApplyNBV.Location = new System.Drawing.Point(288, 190);
+            this.buttonApplyNBV.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonApplyNBV.Name = "buttonApplyNBV";
+            this.buttonApplyNBV.Size = new System.Drawing.Size(62, 25);
+            this.buttonApplyNBV.TabIndex = 33;
+            this.buttonApplyNBV.Text = "Apply";
+            this.buttonApplyNBV.UseVisualStyleBackColor = false;
             // 
-            // roundedButton1
+            // buttonApplyConstraint
             // 
-            this.roundedButton1.BackColor = System.Drawing.Color.Orange;
-            this.roundedButton1.CornerRadius = 8;
-            this.roundedButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.roundedButton1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.roundedButton1.ForeColor = System.Drawing.Color.White;
-            this.roundedButton1.Location = new System.Drawing.Point(288, 111);
-            this.roundedButton1.Margin = new System.Windows.Forms.Padding(2);
-            this.roundedButton1.Name = "roundedButton1";
-            this.roundedButton1.Size = new System.Drawing.Size(62, 25);
-            this.roundedButton1.TabIndex = 31;
-            this.roundedButton1.Text = "Apply";
-            this.roundedButton1.UseVisualStyleBackColor = false;
+            this.buttonApplyConstraint.BackColor = System.Drawing.Color.Orange;
+            this.buttonApplyConstraint.CornerRadius = 8;
+            this.buttonApplyConstraint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonApplyConstraint.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonApplyConstraint.ForeColor = System.Drawing.Color.White;
+            this.buttonApplyConstraint.Location = new System.Drawing.Point(288, 149);
+            this.buttonApplyConstraint.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonApplyConstraint.Name = "buttonApplyConstraint";
+            this.buttonApplyConstraint.Size = new System.Drawing.Size(62, 25);
+            this.buttonApplyConstraint.TabIndex = 32;
+            this.buttonApplyConstraint.Text = "Apply";
+            this.buttonApplyConstraint.UseVisualStyleBackColor = false;
             // 
-            // applybtn1
+            // buttonApplyBasic
             // 
-            this.applybtn1.BackColor = System.Drawing.Color.Orange;
-            this.applybtn1.CornerRadius = 8;
-            this.applybtn1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.applybtn1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.applybtn1.ForeColor = System.Drawing.Color.White;
-            this.applybtn1.Location = new System.Drawing.Point(288, 62);
-            this.applybtn1.Margin = new System.Windows.Forms.Padding(2);
-            this.applybtn1.Name = "applybtn1";
-            this.applybtn1.Size = new System.Drawing.Size(62, 25);
-            this.applybtn1.TabIndex = 27;
-            this.applybtn1.Text = "Apply";
-            this.applybtn1.UseVisualStyleBackColor = false;
+            this.buttonApplyBasic.BackColor = System.Drawing.Color.Orange;
+            this.buttonApplyBasic.CornerRadius = 8;
+            this.buttonApplyBasic.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonApplyBasic.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonApplyBasic.ForeColor = System.Drawing.Color.White;
+            this.buttonApplyBasic.Location = new System.Drawing.Point(288, 111);
+            this.buttonApplyBasic.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonApplyBasic.Name = "buttonApplyBasic";
+            this.buttonApplyBasic.Size = new System.Drawing.Size(62, 25);
+            this.buttonApplyBasic.TabIndex = 31;
+            this.buttonApplyBasic.Text = "Apply";
+            this.buttonApplyBasic.UseVisualStyleBackColor = false;
             // 
-            // comboBox1
+            // buttonApplyNonBasic
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(17, 111);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(173, 21);
-            this.comboBox1.TabIndex = 30;
-            this.comboBox1.Text = "Select Basic Var";
+            this.buttonApplyNonBasic.BackColor = System.Drawing.Color.Orange;
+            this.buttonApplyNonBasic.CornerRadius = 8;
+            this.buttonApplyNonBasic.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonApplyNonBasic.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonApplyNonBasic.ForeColor = System.Drawing.Color.White;
+            this.buttonApplyNonBasic.Location = new System.Drawing.Point(288, 62);
+            this.buttonApplyNonBasic.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonApplyNonBasic.Name = "buttonApplyNonBasic";
+            this.buttonApplyNonBasic.Size = new System.Drawing.Size(62, 25);
+            this.buttonApplyNonBasic.TabIndex = 27;
+            this.buttonApplyNonBasic.Text = "Apply";
+            this.buttonApplyNonBasic.UseVisualStyleBackColor = false;
             // 
-            // comboBox2
+            // comboBoxBasicVar2
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(17, 153);
-            this.comboBox2.Margin = new System.Windows.Forms.Padding(2);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(173, 21);
-            this.comboBox2.TabIndex = 29;
-            this.comboBox2.Text = "Select Constraint RHS";
+            this.comboBoxBasicVar2.FormattingEnabled = true;
+            this.comboBoxBasicVar2.Location = new System.Drawing.Point(17, 111);
+            this.comboBoxBasicVar2.Margin = new System.Windows.Forms.Padding(2);
+            this.comboBoxBasicVar2.Name = "comboBoxBasicVar2";
+            this.comboBoxBasicVar2.Size = new System.Drawing.Size(173, 21);
+            this.comboBoxBasicVar2.TabIndex = 30;
+            this.comboBoxBasicVar2.Text = "Select Basic Var";
             // 
-            // comboBox3
+            // comboBoxConstraintRHS2
             // 
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(17, 194);
-            this.comboBox3.Margin = new System.Windows.Forms.Padding(2);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(173, 21);
-            this.comboBox3.TabIndex = 28;
-            this.comboBox3.Text = "Select Variable in NBV column";
+            this.comboBoxConstraintRHS2.FormattingEnabled = true;
+            this.comboBoxConstraintRHS2.Location = new System.Drawing.Point(17, 153);
+            this.comboBoxConstraintRHS2.Margin = new System.Windows.Forms.Padding(2);
+            this.comboBoxConstraintRHS2.Name = "comboBoxConstraintRHS2";
+            this.comboBoxConstraintRHS2.Size = new System.Drawing.Size(173, 21);
+            this.comboBoxConstraintRHS2.TabIndex = 29;
+            this.comboBoxConstraintRHS2.Text = "Select Constraint RHS";
             // 
-            // comboBox4
+            // comboBoxVarInNBV2
             // 
-            this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Location = new System.Drawing.Point(17, 69);
-            this.comboBox4.Margin = new System.Windows.Forms.Padding(2);
-            this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(173, 21);
-            this.comboBox4.TabIndex = 27;
-            this.comboBox4.Text = "Select Non-Basic Var ";
+            this.comboBoxVarInNBV2.FormattingEnabled = true;
+            this.comboBoxVarInNBV2.Location = new System.Drawing.Point(17, 194);
+            this.comboBoxVarInNBV2.Margin = new System.Windows.Forms.Padding(2);
+            this.comboBoxVarInNBV2.Name = "comboBoxVarInNBV2";
+            this.comboBoxVarInNBV2.Size = new System.Drawing.Size(173, 21);
+            this.comboBoxVarInNBV2.TabIndex = 28;
+            this.comboBoxVarInNBV2.Text = "Select Variable in NBV column";
+            // 
+            // comboBoxNonBasicVar2
+            // 
+            this.comboBoxNonBasicVar2.FormattingEnabled = true;
+            this.comboBoxNonBasicVar2.Location = new System.Drawing.Point(17, 69);
+            this.comboBoxNonBasicVar2.Margin = new System.Windows.Forms.Padding(2);
+            this.comboBoxNonBasicVar2.Name = "comboBoxNonBasicVar2";
+            this.comboBoxNonBasicVar2.Size = new System.Drawing.Size(173, 21);
+            this.comboBoxNonBasicVar2.TabIndex = 27;
+            this.comboBoxNonBasicVar2.Text = "Select Non-Basic Var ";
             // 
             // applychangesLbl
             // 
@@ -483,6 +541,42 @@
             this.RangeAnalysisPanel.Size = new System.Drawing.Size(362, 303);
             this.RangeAnalysisPanel.TabIndex = 1;
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(12, 161);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(151, 13);
+            this.label4.TabIndex = 30;
+            this.label4.Text = "Select Variable in NBV column";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(12, 119);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(113, 13);
+            this.label3.TabIndex = 29;
+            this.label3.Text = "Select Constraint RHS";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(12, 74);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(88, 13);
+            this.label2.TabIndex = 28;
+            this.label2.Text = "Select Basic Var ";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 35);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(111, 13);
+            this.label1.TabIndex = 27;
+            this.label1.Text = "Select Non-Basic Var ";
+            // 
             // buttonShowRangeNBV
             // 
             this.buttonShowRangeNBV.BackColor = System.Drawing.Color.DodgerBlue;
@@ -524,7 +618,6 @@
             this.buttonShowRangeBasic.TabIndex = 24;
             this.buttonShowRangeBasic.Text = "Show Range";
             this.buttonShowRangeBasic.UseVisualStyleBackColor = false;
-            this.buttonShowRangeBasic.Click += new System.EventHandler(this.buttonShowRangeBasic_Click);
             // 
             // buttonShowRangeNonBasic
             // 
@@ -539,7 +632,6 @@
             this.buttonShowRangeNonBasic.TabIndex = 23;
             this.buttonShowRangeNonBasic.Text = "Show Range";
             this.buttonShowRangeNonBasic.UseVisualStyleBackColor = false;
-            this.buttonShowRangeNonBasic.Click += new System.EventHandler(this.showRangeBtn1_Click);
             // 
             // textBoxRangeResult
             // 
@@ -608,42 +700,6 @@
             this.RangeAnaLbl.TabIndex = 0;
             this.RangeAnaLbl.Text = "Range Analysis";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 35);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(111, 13);
-            this.label1.TabIndex = 27;
-            this.label1.Text = "Select Non-Basic Var ";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 74);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(88, 13);
-            this.label2.TabIndex = 28;
-            this.label2.Text = "Select Basic Var ";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 119);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(113, 13);
-            this.label3.TabIndex = 29;
-            this.label3.Text = "Select Constraint RHS";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 161);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(151, 13);
-            this.label4.TabIndex = 30;
-            this.label4.Text = "Select Variable in NBV column";
-            // 
             // SensitivityAnalysis
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -659,10 +715,10 @@
             this.SensAnaTbl.ResumeLayout(false);
             this.ApplyChangesPanel.ResumeLayout(false);
             this.ApplyChangesPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownNonBasic)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownNBV)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownConstraint)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownBasic)).EndInit();
             this.DualityPanel.ResumeLayout(false);
             this.DualityPanel.PerformLayout();
             this.AddNewElementsPanel.ResumeLayout(false);
@@ -694,21 +750,21 @@
         private RoundedRichTextBox roundedRichTextBox2;
         private RoundedRichTextBox addnewActtxtb;
         private RoundedButton buttonShowRangeNonBasic;
-        private RoundedButton applybtn1;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.ComboBox comboBox3;
-        private System.Windows.Forms.ComboBox comboBox4;
+        private RoundedButton buttonApplyNonBasic;
+        private System.Windows.Forms.ComboBox comboBoxBasicVar2;
+        private System.Windows.Forms.ComboBox comboBoxConstraintRHS2;
+        private System.Windows.Forms.ComboBox comboBoxVarInNBV2;
+        private System.Windows.Forms.ComboBox comboBoxNonBasicVar2;
         private RoundedButton buttonShowRangeNBV;
         private RoundedButton buttonShowRangeConstraint;
         private RoundedButton buttonShowRangeBasic;
-        private System.Windows.Forms.NumericUpDown numericUpDown4;
-        private System.Windows.Forms.NumericUpDown numericUpDown3;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
-        private RoundedButton roundedButton3;
-        private RoundedButton roundedButton2;
-        private RoundedButton roundedButton1;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown numericUpDownNBV;
+        private System.Windows.Forms.NumericUpDown numericUpDownConstraint;
+        private System.Windows.Forms.NumericUpDown numericUpDownBasic;
+        private RoundedButton buttonApplyNBV;
+        private RoundedButton buttonApplyConstraint;
+        private RoundedButton buttonApplyBasic;
+        private System.Windows.Forms.NumericUpDown numericUpDownNonBasic;
         private RoundedButton roundedButton4;
         private RoundedRichTextBox roundedRichTextBox3;
         private RoundedRichTextBox shadowPricetxtb;
@@ -719,5 +775,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private RoundedRichTextBox textBoxResult;
     }
 }
