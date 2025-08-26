@@ -51,7 +51,8 @@
     <Compile Include="Controller\Primal revised\Revised1primal.cs" />
     <Compile Include="Controller\Primal\DualSimplex.cs" />
     <Compile Include="Controller\Primal\PrimalSimplex.cs" />
-    <Compile Include="Controller\SensitivityAnalysisController.cs" />
+    <Compile Include="Controller\Sensitivity Analysis\SensitivityRanges.cs" />
+    <Compile Include="Controller\Sensitivity Analysis\SimplexSolver.cs" />
     <Compile Include="Model\Branch and bound.cs" />
     <Compile Include="Model\Knapsack\Item.cs" />
     <Compile Include="Model\Knapsack\KnapsackResult.cs" />
@@ -59,7 +60,7 @@
     <Compile Include="Model\Knapsack\Node.cs" />
     <Compile Include="Model\CuttingPlane\TableauViewer.cs" />
     <Compile Include="Model\LPModel.cs" />
-    <Compile Include="Model\RangeResult.cs" />
+    <Compile Include="Model\Sensitivity analysis\SimplexTableau.cs" />
     <Compile Include="View\BranchAndBoundKnapsackPage.cs">
       <SubType>UserControl</SubType>
     </Compile>

@@ -57,16 +57,20 @@
             this.addnewActtxtb = new LPR381Project.RoundedRichTextBox();
             this.addnewelLbl = new System.Windows.Forms.Label();
             this.RangeAnalysisPanel = new LPR381Project.RoundedPanel();
-            this.showRangeBtn4 = new LPR381Project.RoundedButton();
-            this.showRangeBtn3 = new LPR381Project.RoundedButton();
-            this.showRangeBtn2 = new LPR381Project.RoundedButton();
-            this.showRangeBtn1 = new LPR381Project.RoundedButton();
-            this.RangeResTxtb = new LPR381Project.RoundedRichTextBox();
-            this.selectBV = new System.Windows.Forms.ComboBox();
-            this.selectCRHS = new System.Windows.Forms.ComboBox();
-            this.selectVarNBV = new System.Windows.Forms.ComboBox();
-            this.selectNBV = new System.Windows.Forms.ComboBox();
+            this.buttonShowRangeNBV = new LPR381Project.RoundedButton();
+            this.buttonShowRangeConstraint = new LPR381Project.RoundedButton();
+            this.buttonShowRangeBasic = new LPR381Project.RoundedButton();
+            this.buttonShowRangeNonBasic = new LPR381Project.RoundedButton();
+            this.textBoxRangeResult = new LPR381Project.RoundedRichTextBox();
+            this.comboBoxBasicVar = new System.Windows.Forms.ComboBox();
+            this.comboBoxConstraintRHS = new System.Windows.Forms.ComboBox();
+            this.comboBoxVarInNBV = new System.Windows.Forms.ComboBox();
+            this.comboBoxNonBasicVar = new System.Windows.Forms.ComboBox();
             this.RangeAnaLbl = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.SensAnaTbl.SuspendLayout();
             this.ApplyChangesPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -87,23 +91,24 @@
             this.SensAnaTbl.Controls.Add(this.DualityPanel, 1, 1);
             this.SensAnaTbl.Controls.Add(this.AddNewElementsPanel, 0, 1);
             this.SensAnaTbl.Controls.Add(this.RangeAnalysisPanel, 0, 0);
-            this.SensAnaTbl.Location = new System.Drawing.Point(17, 55);
+            this.SensAnaTbl.Location = new System.Drawing.Point(11, 36);
+            this.SensAnaTbl.Margin = new System.Windows.Forms.Padding(2);
             this.SensAnaTbl.Name = "SensAnaTbl";
             this.SensAnaTbl.RowCount = 2;
             this.SensAnaTbl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.SensAnaTbl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.SensAnaTbl.Size = new System.Drawing.Size(1098, 945);
+            this.SensAnaTbl.Size = new System.Drawing.Size(732, 614);
             this.SensAnaTbl.TabIndex = 0;
-            this.SensAnaTbl.Paint += new System.Windows.Forms.PaintEventHandler(this.SensAnaTbl_Paint);
             // 
             // sensAnalbl
             // 
             this.sensAnalbl.AutoSize = true;
-            this.sensAnalbl.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sensAnalbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.sensAnalbl.ForeColor = System.Drawing.Color.Black;
-            this.sensAnalbl.Location = new System.Drawing.Point(12, 15);
+            this.sensAnalbl.Location = new System.Drawing.Point(8, 10);
+            this.sensAnalbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.sensAnalbl.Name = "sensAnalbl";
-            this.sensAnalbl.Size = new System.Drawing.Size(219, 26);
+            this.sensAnalbl.Size = new System.Drawing.Size(131, 18);
             this.sensAnalbl.TabIndex = 1;
             this.sensAnalbl.Text = "Sensitivity Analysis";
             // 
@@ -125,45 +130,49 @@
             this.ApplyChangesPanel.Controls.Add(this.applychangesLbl);
             this.ApplyChangesPanel.CornerRadius = 12;
             this.ApplyChangesPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ApplyChangesPanel.Location = new System.Drawing.Point(552, 3);
+            this.ApplyChangesPanel.Location = new System.Drawing.Point(368, 2);
+            this.ApplyChangesPanel.Margin = new System.Windows.Forms.Padding(2);
             this.ApplyChangesPanel.Name = "ApplyChangesPanel";
-            this.ApplyChangesPanel.Size = new System.Drawing.Size(543, 466);
+            this.ApplyChangesPanel.Size = new System.Drawing.Size(362, 303);
             this.ApplyChangesPanel.TabIndex = 0;
             // 
             // numericUpDown1
             // 
             this.numericUpDown1.ForeColor = System.Drawing.Color.Silver;
-            this.numericUpDown1.Location = new System.Drawing.Point(303, 103);
+            this.numericUpDown1.Location = new System.Drawing.Point(202, 67);
+            this.numericUpDown1.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(120, 26);
+            this.numericUpDown1.Size = new System.Drawing.Size(80, 20);
             this.numericUpDown1.TabIndex = 38;
             this.numericUpDown1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
             // 
             // numericUpDown4
             // 
             this.numericUpDown4.ForeColor = System.Drawing.Color.Silver;
-            this.numericUpDown4.Location = new System.Drawing.Point(303, 305);
+            this.numericUpDown4.Location = new System.Drawing.Point(202, 198);
+            this.numericUpDown4.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDown4.Name = "numericUpDown4";
-            this.numericUpDown4.Size = new System.Drawing.Size(120, 26);
+            this.numericUpDown4.Size = new System.Drawing.Size(80, 20);
             this.numericUpDown4.TabIndex = 37;
             this.numericUpDown4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // numericUpDown3
             // 
             this.numericUpDown3.ForeColor = System.Drawing.Color.Silver;
-            this.numericUpDown3.Location = new System.Drawing.Point(303, 237);
+            this.numericUpDown3.Location = new System.Drawing.Point(202, 154);
+            this.numericUpDown3.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDown3.Name = "numericUpDown3";
-            this.numericUpDown3.Size = new System.Drawing.Size(120, 26);
+            this.numericUpDown3.Size = new System.Drawing.Size(80, 20);
             this.numericUpDown3.TabIndex = 36;
             this.numericUpDown3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // numericUpDown2
             // 
             this.numericUpDown2.ForeColor = System.Drawing.Color.Silver;
-            this.numericUpDown2.Location = new System.Drawing.Point(303, 177);
+            this.numericUpDown2.Location = new System.Drawing.Point(202, 115);
+            this.numericUpDown2.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(120, 26);
+            this.numericUpDown2.Size = new System.Drawing.Size(80, 20);
             this.numericUpDown2.TabIndex = 35;
             this.numericUpDown2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -172,104 +181,109 @@
             this.roundedButton3.BackColor = System.Drawing.Color.Orange;
             this.roundedButton3.CornerRadius = 8;
             this.roundedButton3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.roundedButton3.Font = new System.Drawing.Font("Arial Rounded MT Bold", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.roundedButton3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.roundedButton3.ForeColor = System.Drawing.Color.White;
-            this.roundedButton3.Location = new System.Drawing.Point(432, 293);
+            this.roundedButton3.Location = new System.Drawing.Point(288, 190);
+            this.roundedButton3.Margin = new System.Windows.Forms.Padding(2);
             this.roundedButton3.Name = "roundedButton3";
-            this.roundedButton3.Size = new System.Drawing.Size(93, 38);
+            this.roundedButton3.Size = new System.Drawing.Size(62, 25);
             this.roundedButton3.TabIndex = 33;
             this.roundedButton3.Text = "Apply";
             this.roundedButton3.UseVisualStyleBackColor = false;
-            this.roundedButton3.Click += new System.EventHandler(this.roundedButton3_Click);
             // 
             // roundedButton2
             // 
             this.roundedButton2.BackColor = System.Drawing.Color.Orange;
             this.roundedButton2.CornerRadius = 8;
             this.roundedButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.roundedButton2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.roundedButton2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.roundedButton2.ForeColor = System.Drawing.Color.White;
-            this.roundedButton2.Location = new System.Drawing.Point(432, 229);
+            this.roundedButton2.Location = new System.Drawing.Point(288, 149);
+            this.roundedButton2.Margin = new System.Windows.Forms.Padding(2);
             this.roundedButton2.Name = "roundedButton2";
-            this.roundedButton2.Size = new System.Drawing.Size(93, 38);
+            this.roundedButton2.Size = new System.Drawing.Size(62, 25);
             this.roundedButton2.TabIndex = 32;
             this.roundedButton2.Text = "Apply";
             this.roundedButton2.UseVisualStyleBackColor = false;
-            this.roundedButton2.Click += new System.EventHandler(this.roundedButton2_Click);
             // 
             // roundedButton1
             // 
             this.roundedButton1.BackColor = System.Drawing.Color.Orange;
             this.roundedButton1.CornerRadius = 8;
             this.roundedButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.roundedButton1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.roundedButton1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.roundedButton1.ForeColor = System.Drawing.Color.White;
-            this.roundedButton1.Location = new System.Drawing.Point(432, 171);
+            this.roundedButton1.Location = new System.Drawing.Point(288, 111);
+            this.roundedButton1.Margin = new System.Windows.Forms.Padding(2);
             this.roundedButton1.Name = "roundedButton1";
-            this.roundedButton1.Size = new System.Drawing.Size(93, 38);
+            this.roundedButton1.Size = new System.Drawing.Size(62, 25);
             this.roundedButton1.TabIndex = 31;
             this.roundedButton1.Text = "Apply";
             this.roundedButton1.UseVisualStyleBackColor = false;
-            this.roundedButton1.Click += new System.EventHandler(this.roundedButton1_Click);
             // 
             // applybtn1
             // 
             this.applybtn1.BackColor = System.Drawing.Color.Orange;
             this.applybtn1.CornerRadius = 8;
             this.applybtn1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.applybtn1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.applybtn1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.applybtn1.ForeColor = System.Drawing.Color.White;
-            this.applybtn1.Location = new System.Drawing.Point(432, 96);
+            this.applybtn1.Location = new System.Drawing.Point(288, 62);
+            this.applybtn1.Margin = new System.Windows.Forms.Padding(2);
             this.applybtn1.Name = "applybtn1";
-            this.applybtn1.Size = new System.Drawing.Size(93, 38);
+            this.applybtn1.Size = new System.Drawing.Size(62, 25);
             this.applybtn1.TabIndex = 27;
             this.applybtn1.Text = "Apply";
             this.applybtn1.UseVisualStyleBackColor = false;
-            this.applybtn1.Click += new System.EventHandler(this.applybtn1_Click);
             // 
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(25, 171);
+            this.comboBox1.Location = new System.Drawing.Point(17, 111);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(257, 28);
+            this.comboBox1.Size = new System.Drawing.Size(173, 21);
             this.comboBox1.TabIndex = 30;
             this.comboBox1.Text = "Select Basic Var";
             // 
             // comboBox2
             // 
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(25, 235);
+            this.comboBox2.Location = new System.Drawing.Point(17, 153);
+            this.comboBox2.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(257, 28);
+            this.comboBox2.Size = new System.Drawing.Size(173, 21);
             this.comboBox2.TabIndex = 29;
             this.comboBox2.Text = "Select Constraint RHS";
             // 
             // comboBox3
             // 
             this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(25, 299);
+            this.comboBox3.Location = new System.Drawing.Point(17, 194);
+            this.comboBox3.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(257, 28);
+            this.comboBox3.Size = new System.Drawing.Size(173, 21);
             this.comboBox3.TabIndex = 28;
             this.comboBox3.Text = "Select Variable in NBV column";
             // 
             // comboBox4
             // 
             this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Location = new System.Drawing.Point(25, 106);
+            this.comboBox4.Location = new System.Drawing.Point(17, 69);
+            this.comboBox4.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(257, 28);
+            this.comboBox4.Size = new System.Drawing.Size(173, 21);
             this.comboBox4.TabIndex = 27;
             this.comboBox4.Text = "Select Non-Basic Var ";
             // 
             // applychangesLbl
             // 
             this.applychangesLbl.AutoSize = true;
-            this.applychangesLbl.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.applychangesLbl.Location = new System.Drawing.Point(20, 16);
+            this.applychangesLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.applychangesLbl.Location = new System.Drawing.Point(13, 10);
+            this.applychangesLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.applychangesLbl.Name = "applychangesLbl";
-            this.applychangesLbl.Size = new System.Drawing.Size(174, 26);
+            this.applychangesLbl.Size = new System.Drawing.Size(106, 18);
             this.applychangesLbl.TabIndex = 0;
             this.applychangesLbl.Text = "Apply Changes";
             // 
@@ -282,9 +296,10 @@
             this.DualityPanel.Controls.Add(this.dispShadPricBtn);
             this.DualityPanel.Controls.Add(this.dualityLbl);
             this.DualityPanel.CornerRadius = 12;
-            this.DualityPanel.Location = new System.Drawing.Point(552, 475);
+            this.DualityPanel.Location = new System.Drawing.Point(368, 309);
+            this.DualityPanel.Margin = new System.Windows.Forms.Padding(2);
             this.DualityPanel.Name = "DualityPanel";
-            this.DualityPanel.Size = new System.Drawing.Size(543, 467);
+            this.DualityPanel.Size = new System.Drawing.Size(362, 303);
             this.DualityPanel.TabIndex = 2;
             // 
             // roundedRichTextBox3
@@ -294,11 +309,12 @@
             this.roundedRichTextBox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.roundedRichTextBox3.BorderThickness = 1;
             this.roundedRichTextBox3.CornerRadius = 12;
-            this.roundedRichTextBox3.Font = new System.Drawing.Font("Arial Rounded MT Bold", 10F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.roundedRichTextBox3.ForeColor = System.Drawing.Color.Silver;
-            this.roundedRichTextBox3.Location = new System.Drawing.Point(37, 308);
+            this.roundedRichTextBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.roundedRichTextBox3.ForeColor = System.Drawing.Color.Black;
+            this.roundedRichTextBox3.Location = new System.Drawing.Point(25, 200);
+            this.roundedRichTextBox3.Margin = new System.Windows.Forms.Padding(2);
             this.roundedRichTextBox3.Name = "roundedRichTextBox3";
-            this.roundedRichTextBox3.Size = new System.Drawing.Size(474, 78);
+            this.roundedRichTextBox3.Size = new System.Drawing.Size(316, 51);
             this.roundedRichTextBox3.TabIndex = 32;
             this.roundedRichTextBox3.Text = "  Duality Results";
             // 
@@ -309,11 +325,12 @@
             this.shadowPricetxtb.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.shadowPricetxtb.BorderThickness = 1;
             this.shadowPricetxtb.CornerRadius = 12;
-            this.shadowPricetxtb.Font = new System.Drawing.Font("Arial Rounded MT Bold", 10F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.shadowPricetxtb.ForeColor = System.Drawing.Color.Silver;
-            this.shadowPricetxtb.Location = new System.Drawing.Point(37, 145);
+            this.shadowPricetxtb.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.shadowPricetxtb.ForeColor = System.Drawing.Color.Black;
+            this.shadowPricetxtb.Location = new System.Drawing.Point(25, 94);
+            this.shadowPricetxtb.Margin = new System.Windows.Forms.Padding(2);
             this.shadowPricetxtb.Name = "shadowPricetxtb";
-            this.shadowPricetxtb.Size = new System.Drawing.Size(474, 78);
+            this.shadowPricetxtb.Size = new System.Drawing.Size(316, 51);
             this.shadowPricetxtb.TabIndex = 29;
             this.shadowPricetxtb.Text = "   Shadow Prices...";
             // 
@@ -321,37 +338,38 @@
             // 
             this.solveDualBtn.BackColor = System.Drawing.Color.DodgerBlue;
             this.solveDualBtn.CornerRadius = 8;
-            this.solveDualBtn.Font = new System.Drawing.Font("Arial Rounded MT Bold", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.solveDualBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.solveDualBtn.ForeColor = System.Drawing.Color.White;
-            this.solveDualBtn.Location = new System.Drawing.Point(37, 241);
+            this.solveDualBtn.Location = new System.Drawing.Point(25, 157);
+            this.solveDualBtn.Margin = new System.Windows.Forms.Padding(2);
             this.solveDualBtn.Name = "solveDualBtn";
-            this.solveDualBtn.Size = new System.Drawing.Size(462, 51);
+            this.solveDualBtn.Size = new System.Drawing.Size(308, 33);
             this.solveDualBtn.TabIndex = 30;
             this.solveDualBtn.Text = "Solve Dual and Verify Duality";
             this.solveDualBtn.UseVisualStyleBackColor = false;
-            this.solveDualBtn.Click += new System.EventHandler(this.solveDualBtn_Click);
             // 
             // dispShadPricBtn
             // 
             this.dispShadPricBtn.BackColor = System.Drawing.Color.DodgerBlue;
             this.dispShadPricBtn.CornerRadius = 8;
-            this.dispShadPricBtn.Font = new System.Drawing.Font("Arial Rounded MT Bold", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dispShadPricBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dispShadPricBtn.ForeColor = System.Drawing.Color.White;
-            this.dispShadPricBtn.Location = new System.Drawing.Point(37, 88);
+            this.dispShadPricBtn.Location = new System.Drawing.Point(25, 57);
+            this.dispShadPricBtn.Margin = new System.Windows.Forms.Padding(2);
             this.dispShadPricBtn.Name = "dispShadPricBtn";
-            this.dispShadPricBtn.Size = new System.Drawing.Size(474, 51);
+            this.dispShadPricBtn.Size = new System.Drawing.Size(316, 33);
             this.dispShadPricBtn.TabIndex = 29;
             this.dispShadPricBtn.Text = "Display Shadow Prices";
             this.dispShadPricBtn.UseVisualStyleBackColor = false;
-            this.dispShadPricBtn.Click += new System.EventHandler(this.dispShadPricBtn_Click);
             // 
             // dualityLbl
             // 
             this.dualityLbl.AutoSize = true;
-            this.dualityLbl.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dualityLbl.Location = new System.Drawing.Point(20, 19);
+            this.dualityLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dualityLbl.Location = new System.Drawing.Point(13, 12);
+            this.dualityLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.dualityLbl.Name = "dualityLbl";
-            this.dualityLbl.Size = new System.Drawing.Size(86, 26);
+            this.dualityLbl.Size = new System.Drawing.Size(52, 18);
             this.dualityLbl.TabIndex = 2;
             this.dualityLbl.Text = "Duality";
             // 
@@ -364,38 +382,39 @@
             this.AddNewElementsPanel.Controls.Add(this.addnewActtxtb);
             this.AddNewElementsPanel.Controls.Add(this.addnewelLbl);
             this.AddNewElementsPanel.CornerRadius = 12;
-            this.AddNewElementsPanel.Location = new System.Drawing.Point(3, 475);
+            this.AddNewElementsPanel.Location = new System.Drawing.Point(2, 309);
+            this.AddNewElementsPanel.Margin = new System.Windows.Forms.Padding(2);
             this.AddNewElementsPanel.Name = "AddNewElementsPanel";
-            this.AddNewElementsPanel.Size = new System.Drawing.Size(543, 467);
+            this.AddNewElementsPanel.Size = new System.Drawing.Size(362, 303);
             this.AddNewElementsPanel.TabIndex = 3;
             // 
             // roundedButton5
             // 
             this.roundedButton5.BackColor = System.Drawing.Color.DodgerBlue;
             this.roundedButton5.CornerRadius = 8;
-            this.roundedButton5.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.roundedButton5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.roundedButton5.ForeColor = System.Drawing.Color.White;
-            this.roundedButton5.Location = new System.Drawing.Point(54, 349);
+            this.roundedButton5.Location = new System.Drawing.Point(36, 227);
+            this.roundedButton5.Margin = new System.Windows.Forms.Padding(2);
             this.roundedButton5.Name = "roundedButton5";
-            this.roundedButton5.Size = new System.Drawing.Size(186, 53);
+            this.roundedButton5.Size = new System.Drawing.Size(124, 34);
             this.roundedButton5.TabIndex = 28;
             this.roundedButton5.Text = "Add new Constraint";
             this.roundedButton5.UseVisualStyleBackColor = false;
-            this.roundedButton5.Click += new System.EventHandler(this.roundedButton5_Click);
             // 
             // roundedButton4
             // 
             this.roundedButton4.BackColor = System.Drawing.Color.DodgerBlue;
             this.roundedButton4.CornerRadius = 8;
-            this.roundedButton4.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.roundedButton4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.roundedButton4.ForeColor = System.Drawing.Color.White;
-            this.roundedButton4.Location = new System.Drawing.Point(54, 160);
+            this.roundedButton4.Location = new System.Drawing.Point(36, 104);
+            this.roundedButton4.Margin = new System.Windows.Forms.Padding(2);
             this.roundedButton4.Name = "roundedButton4";
-            this.roundedButton4.Size = new System.Drawing.Size(157, 51);
+            this.roundedButton4.Size = new System.Drawing.Size(105, 33);
             this.roundedButton4.TabIndex = 27;
             this.roundedButton4.Text = "Add new Activity";
             this.roundedButton4.UseVisualStyleBackColor = false;
-            this.roundedButton4.Click += new System.EventHandler(this.roundedButton4_Click);
             // 
             // roundedRichTextBox2
             // 
@@ -404,11 +423,12 @@
             this.roundedRichTextBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.roundedRichTextBox2.BorderThickness = 1;
             this.roundedRichTextBox2.CornerRadius = 12;
-            this.roundedRichTextBox2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 10F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.roundedRichTextBox2.ForeColor = System.Drawing.Color.Silver;
-            this.roundedRichTextBox2.Location = new System.Drawing.Point(45, 241);
+            this.roundedRichTextBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.roundedRichTextBox2.ForeColor = System.Drawing.Color.Black;
+            this.roundedRichTextBox2.Location = new System.Drawing.Point(30, 157);
+            this.roundedRichTextBox2.Margin = new System.Windows.Forms.Padding(2);
             this.roundedRichTextBox2.Name = "roundedRichTextBox2";
-            this.roundedRichTextBox2.Size = new System.Drawing.Size(447, 80);
+            this.roundedRichTextBox2.Size = new System.Drawing.Size(298, 52);
             this.roundedRichTextBox2.TabIndex = 10;
             this.roundedRichTextBox2.Text = "  New constraint coefficients, relation, RHS...";
             // 
@@ -419,173 +439,223 @@
             this.addnewActtxtb.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.addnewActtxtb.BorderThickness = 1;
             this.addnewActtxtb.CornerRadius = 12;
-            this.addnewActtxtb.Font = new System.Drawing.Font("Arial Rounded MT Bold", 10F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addnewActtxtb.ForeColor = System.Drawing.Color.LightGray;
-            this.addnewActtxtb.Location = new System.Drawing.Point(45, 75);
+            this.addnewActtxtb.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addnewActtxtb.ForeColor = System.Drawing.Color.Black;
+            this.addnewActtxtb.Location = new System.Drawing.Point(30, 49);
+            this.addnewActtxtb.Margin = new System.Windows.Forms.Padding(2);
             this.addnewActtxtb.Name = "addnewActtxtb";
-            this.addnewActtxtb.Size = new System.Drawing.Size(413, 79);
+            this.addnewActtxtb.Size = new System.Drawing.Size(275, 51);
             this.addnewActtxtb.TabIndex = 9;
             this.addnewActtxtb.Text = "  New actvity coefficients";
             // 
             // addnewelLbl
             // 
             this.addnewelLbl.AutoSize = true;
-            this.addnewelLbl.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addnewelLbl.Location = new System.Drawing.Point(13, 19);
+            this.addnewelLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addnewelLbl.Location = new System.Drawing.Point(9, 12);
+            this.addnewelLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.addnewelLbl.Name = "addnewelLbl";
-            this.addnewelLbl.Size = new System.Drawing.Size(215, 26);
+            this.addnewelLbl.Size = new System.Drawing.Size(133, 18);
             this.addnewelLbl.TabIndex = 1;
             this.addnewelLbl.Text = "Add New Elements";
             // 
             // RangeAnalysisPanel
             // 
             this.RangeAnalysisPanel.BackColor = System.Drawing.Color.White;
-            this.RangeAnalysisPanel.Controls.Add(this.showRangeBtn4);
-            this.RangeAnalysisPanel.Controls.Add(this.showRangeBtn3);
-            this.RangeAnalysisPanel.Controls.Add(this.showRangeBtn2);
-            this.RangeAnalysisPanel.Controls.Add(this.showRangeBtn1);
-            this.RangeAnalysisPanel.Controls.Add(this.RangeResTxtb);
-            this.RangeAnalysisPanel.Controls.Add(this.selectBV);
-            this.RangeAnalysisPanel.Controls.Add(this.selectCRHS);
-            this.RangeAnalysisPanel.Controls.Add(this.selectVarNBV);
-            this.RangeAnalysisPanel.Controls.Add(this.selectNBV);
+            this.RangeAnalysisPanel.Controls.Add(this.label4);
+            this.RangeAnalysisPanel.Controls.Add(this.label3);
+            this.RangeAnalysisPanel.Controls.Add(this.label2);
+            this.RangeAnalysisPanel.Controls.Add(this.label1);
+            this.RangeAnalysisPanel.Controls.Add(this.buttonShowRangeNBV);
+            this.RangeAnalysisPanel.Controls.Add(this.buttonShowRangeConstraint);
+            this.RangeAnalysisPanel.Controls.Add(this.buttonShowRangeBasic);
+            this.RangeAnalysisPanel.Controls.Add(this.buttonShowRangeNonBasic);
+            this.RangeAnalysisPanel.Controls.Add(this.textBoxRangeResult);
+            this.RangeAnalysisPanel.Controls.Add(this.comboBoxBasicVar);
+            this.RangeAnalysisPanel.Controls.Add(this.comboBoxConstraintRHS);
+            this.RangeAnalysisPanel.Controls.Add(this.comboBoxVarInNBV);
+            this.RangeAnalysisPanel.Controls.Add(this.comboBoxNonBasicVar);
             this.RangeAnalysisPanel.Controls.Add(this.RangeAnaLbl);
             this.RangeAnalysisPanel.CornerRadius = 12;
-            this.RangeAnalysisPanel.Location = new System.Drawing.Point(3, 3);
+            this.RangeAnalysisPanel.Location = new System.Drawing.Point(2, 2);
+            this.RangeAnalysisPanel.Margin = new System.Windows.Forms.Padding(2);
             this.RangeAnalysisPanel.Name = "RangeAnalysisPanel";
-            this.RangeAnalysisPanel.Size = new System.Drawing.Size(543, 466);
+            this.RangeAnalysisPanel.Size = new System.Drawing.Size(362, 303);
             this.RangeAnalysisPanel.TabIndex = 1;
             // 
-            // showRangeBtn4
+            // buttonShowRangeNBV
             // 
-            this.showRangeBtn4.BackColor = System.Drawing.Color.DodgerBlue;
-            this.showRangeBtn4.CornerRadius = 8;
-            this.showRangeBtn4.Font = new System.Drawing.Font("Arial Rounded MT Bold", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.showRangeBtn4.ForeColor = System.Drawing.Color.White;
-            this.showRangeBtn4.Location = new System.Drawing.Point(419, 264);
-            this.showRangeBtn4.Name = "showRangeBtn4";
-            this.showRangeBtn4.Size = new System.Drawing.Size(124, 38);
-            this.showRangeBtn4.TabIndex = 26;
-            this.showRangeBtn4.Text = "Show Range";
-            this.showRangeBtn4.UseVisualStyleBackColor = false;
-            this.showRangeBtn4.Click += new System.EventHandler(this.showRangeBtn4_Click);
+            this.buttonShowRangeNBV.BackColor = System.Drawing.Color.DodgerBlue;
+            this.buttonShowRangeNBV.CornerRadius = 8;
+            this.buttonShowRangeNBV.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonShowRangeNBV.ForeColor = System.Drawing.Color.White;
+            this.buttonShowRangeNBV.Location = new System.Drawing.Point(279, 172);
+            this.buttonShowRangeNBV.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonShowRangeNBV.Name = "buttonShowRangeNBV";
+            this.buttonShowRangeNBV.Size = new System.Drawing.Size(83, 25);
+            this.buttonShowRangeNBV.TabIndex = 26;
+            this.buttonShowRangeNBV.Text = "Show Range";
+            this.buttonShowRangeNBV.UseVisualStyleBackColor = false;
             // 
-            // showRangeBtn3
+            // buttonShowRangeConstraint
             // 
-            this.showRangeBtn3.BackColor = System.Drawing.Color.DodgerBlue;
-            this.showRangeBtn3.CornerRadius = 8;
-            this.showRangeBtn3.Font = new System.Drawing.Font("Arial Rounded MT Bold", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.showRangeBtn3.ForeColor = System.Drawing.Color.White;
-            this.showRangeBtn3.Location = new System.Drawing.Point(419, 206);
-            this.showRangeBtn3.Name = "showRangeBtn3";
-            this.showRangeBtn3.Size = new System.Drawing.Size(124, 38);
-            this.showRangeBtn3.TabIndex = 25;
-            this.showRangeBtn3.Text = "Show Range";
-            this.showRangeBtn3.UseVisualStyleBackColor = false;
-            this.showRangeBtn3.Click += new System.EventHandler(this.showRangeBtn3_Click);
+            this.buttonShowRangeConstraint.BackColor = System.Drawing.Color.DodgerBlue;
+            this.buttonShowRangeConstraint.CornerRadius = 8;
+            this.buttonShowRangeConstraint.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonShowRangeConstraint.ForeColor = System.Drawing.Color.White;
+            this.buttonShowRangeConstraint.Location = new System.Drawing.Point(279, 134);
+            this.buttonShowRangeConstraint.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonShowRangeConstraint.Name = "buttonShowRangeConstraint";
+            this.buttonShowRangeConstraint.Size = new System.Drawing.Size(83, 25);
+            this.buttonShowRangeConstraint.TabIndex = 25;
+            this.buttonShowRangeConstraint.Text = "Show Range";
+            this.buttonShowRangeConstraint.UseVisualStyleBackColor = false;
             // 
-            // showRangeBtn2
+            // buttonShowRangeBasic
             // 
-            this.showRangeBtn2.BackColor = System.Drawing.Color.DodgerBlue;
-            this.showRangeBtn2.CornerRadius = 8;
-            this.showRangeBtn2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.showRangeBtn2.ForeColor = System.Drawing.Color.White;
-            this.showRangeBtn2.Location = new System.Drawing.Point(419, 136);
-            this.showRangeBtn2.Name = "showRangeBtn2";
-            this.showRangeBtn2.Size = new System.Drawing.Size(124, 38);
-            this.showRangeBtn2.TabIndex = 24;
-            this.showRangeBtn2.Text = "Show Range";
-            this.showRangeBtn2.UseVisualStyleBackColor = false;
-            this.showRangeBtn2.Click += new System.EventHandler(this.showRangeBtn2_Click);
+            this.buttonShowRangeBasic.BackColor = System.Drawing.Color.DodgerBlue;
+            this.buttonShowRangeBasic.CornerRadius = 8;
+            this.buttonShowRangeBasic.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonShowRangeBasic.ForeColor = System.Drawing.Color.White;
+            this.buttonShowRangeBasic.Location = new System.Drawing.Point(279, 88);
+            this.buttonShowRangeBasic.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonShowRangeBasic.Name = "buttonShowRangeBasic";
+            this.buttonShowRangeBasic.Size = new System.Drawing.Size(83, 25);
+            this.buttonShowRangeBasic.TabIndex = 24;
+            this.buttonShowRangeBasic.Text = "Show Range";
+            this.buttonShowRangeBasic.UseVisualStyleBackColor = false;
+            this.buttonShowRangeBasic.Click += new System.EventHandler(this.buttonShowRangeBasic_Click);
             // 
-            // showRangeBtn1
+            // buttonShowRangeNonBasic
             // 
-            this.showRangeBtn1.BackColor = System.Drawing.Color.DodgerBlue;
-            this.showRangeBtn1.CornerRadius = 8;
-            this.showRangeBtn1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.showRangeBtn1.ForeColor = System.Drawing.Color.White;
-            this.showRangeBtn1.Location = new System.Drawing.Point(416, 77);
-            this.showRangeBtn1.Name = "showRangeBtn1";
-            this.showRangeBtn1.Size = new System.Drawing.Size(124, 38);
-            this.showRangeBtn1.TabIndex = 23;
-            this.showRangeBtn1.Text = "Show Range";
-            this.showRangeBtn1.UseVisualStyleBackColor = false;
-            this.showRangeBtn1.Click += new System.EventHandler(this.showRangeBtn1_Click);
+            this.buttonShowRangeNonBasic.BackColor = System.Drawing.Color.DodgerBlue;
+            this.buttonShowRangeNonBasic.CornerRadius = 8;
+            this.buttonShowRangeNonBasic.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonShowRangeNonBasic.ForeColor = System.Drawing.Color.White;
+            this.buttonShowRangeNonBasic.Location = new System.Drawing.Point(277, 50);
+            this.buttonShowRangeNonBasic.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonShowRangeNonBasic.Name = "buttonShowRangeNonBasic";
+            this.buttonShowRangeNonBasic.Size = new System.Drawing.Size(83, 25);
+            this.buttonShowRangeNonBasic.TabIndex = 23;
+            this.buttonShowRangeNonBasic.Text = "Show Range";
+            this.buttonShowRangeNonBasic.UseVisualStyleBackColor = false;
+            this.buttonShowRangeNonBasic.Click += new System.EventHandler(this.showRangeBtn1_Click);
             // 
-            // RangeResTxtb
+            // textBoxRangeResult
             // 
-            this.RangeResTxtb.BackColor = System.Drawing.SystemColors.Control;
-            this.RangeResTxtb.BorderColor = System.Drawing.Color.LightGray;
-            this.RangeResTxtb.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.RangeResTxtb.BorderThickness = 1;
-            this.RangeResTxtb.CornerRadius = 12;
-            this.RangeResTxtb.Font = new System.Drawing.Font("Arial Rounded MT Bold", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RangeResTxtb.ForeColor = System.Drawing.Color.Silver;
-            this.RangeResTxtb.Location = new System.Drawing.Point(27, 365);
-            this.RangeResTxtb.Name = "RangeResTxtb";
-            this.RangeResTxtb.Size = new System.Drawing.Size(332, 48);
-            this.RangeResTxtb.TabIndex = 0;
-            this.RangeResTxtb.Text = "  Range Result...";
+            this.textBoxRangeResult.BackColor = System.Drawing.SystemColors.Control;
+            this.textBoxRangeResult.BorderColor = System.Drawing.Color.LightGray;
+            this.textBoxRangeResult.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBoxRangeResult.BorderThickness = 1;
+            this.textBoxRangeResult.CornerRadius = 12;
+            this.textBoxRangeResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxRangeResult.ForeColor = System.Drawing.Color.Black;
+            this.textBoxRangeResult.Location = new System.Drawing.Point(12, 210);
+            this.textBoxRangeResult.Margin = new System.Windows.Forms.Padding(2);
+            this.textBoxRangeResult.Name = "textBoxRangeResult";
+            this.textBoxRangeResult.Size = new System.Drawing.Size(332, 78);
+            this.textBoxRangeResult.TabIndex = 0;
+            this.textBoxRangeResult.Text = "  Range Result...";
             // 
-            // selectBV
+            // comboBoxBasicVar
             // 
-            this.selectBV.FormattingEnabled = true;
-            this.selectBV.Location = new System.Drawing.Point(18, 142);
-            this.selectBV.Name = "selectBV";
-            this.selectBV.Size = new System.Drawing.Size(384, 28);
-            this.selectBV.TabIndex = 4;
-            this.selectBV.Text = "Select Basic Var";
-            this.selectBV.SelectedIndexChanged += new System.EventHandler(this.selectNBV_SelectedIndexChanged);
+            this.comboBoxBasicVar.FormattingEnabled = true;
+            this.comboBoxBasicVar.Location = new System.Drawing.Point(12, 92);
+            this.comboBoxBasicVar.Margin = new System.Windows.Forms.Padding(2);
+            this.comboBoxBasicVar.Name = "comboBoxBasicVar";
+            this.comboBoxBasicVar.Size = new System.Drawing.Size(257, 21);
+            this.comboBoxBasicVar.TabIndex = 4;
+            this.comboBoxBasicVar.Text = "Select Basic Var";
             // 
-            // selectCRHS
+            // comboBoxConstraintRHS
             // 
-            this.selectCRHS.FormattingEnabled = true;
-            this.selectCRHS.Location = new System.Drawing.Point(18, 206);
-            this.selectCRHS.Name = "selectCRHS";
-            this.selectCRHS.Size = new System.Drawing.Size(384, 28);
-            this.selectCRHS.TabIndex = 3;
-            this.selectCRHS.Text = "Select Constraint RHS";
+            this.comboBoxConstraintRHS.FormattingEnabled = true;
+            this.comboBoxConstraintRHS.Location = new System.Drawing.Point(12, 134);
+            this.comboBoxConstraintRHS.Margin = new System.Windows.Forms.Padding(2);
+            this.comboBoxConstraintRHS.Name = "comboBoxConstraintRHS";
+            this.comboBoxConstraintRHS.Size = new System.Drawing.Size(257, 21);
+            this.comboBoxConstraintRHS.TabIndex = 3;
+            this.comboBoxConstraintRHS.Text = "Select Constraint RHS";
             // 
-            // selectVarNBV
+            // comboBoxVarInNBV
             // 
-            this.selectVarNBV.FormattingEnabled = true;
-            this.selectVarNBV.Location = new System.Drawing.Point(18, 270);
-            this.selectVarNBV.Name = "selectVarNBV";
-            this.selectVarNBV.Size = new System.Drawing.Size(384, 28);
-            this.selectVarNBV.TabIndex = 2;
-            this.selectVarNBV.Text = "Select Variable in NBV column";
+            this.comboBoxVarInNBV.FormattingEnabled = true;
+            this.comboBoxVarInNBV.Location = new System.Drawing.Point(12, 176);
+            this.comboBoxVarInNBV.Margin = new System.Windows.Forms.Padding(2);
+            this.comboBoxVarInNBV.Name = "comboBoxVarInNBV";
+            this.comboBoxVarInNBV.Size = new System.Drawing.Size(257, 21);
+            this.comboBoxVarInNBV.TabIndex = 2;
+            this.comboBoxVarInNBV.Text = "Select Variable in NBV column";
             // 
-            // selectNBV
+            // comboBoxNonBasicVar
             // 
-            this.selectNBV.FormattingEnabled = true;
-            this.selectNBV.Location = new System.Drawing.Point(18, 77);
-            this.selectNBV.Name = "selectNBV";
-            this.selectNBV.Size = new System.Drawing.Size(384, 28);
-            this.selectNBV.TabIndex = 1;
-            this.selectNBV.Text = "Select Non-Basic Var ";
+            this.comboBoxNonBasicVar.FormattingEnabled = true;
+            this.comboBoxNonBasicVar.Location = new System.Drawing.Point(12, 50);
+            this.comboBoxNonBasicVar.Margin = new System.Windows.Forms.Padding(2);
+            this.comboBoxNonBasicVar.Name = "comboBoxNonBasicVar";
+            this.comboBoxNonBasicVar.Size = new System.Drawing.Size(257, 21);
+            this.comboBoxNonBasicVar.TabIndex = 1;
+            this.comboBoxNonBasicVar.Text = "Select Non-Basic Var ";
             // 
             // RangeAnaLbl
             // 
             this.RangeAnaLbl.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.RangeAnaLbl.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RangeAnaLbl.Location = new System.Drawing.Point(13, 16);
+            this.RangeAnaLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RangeAnaLbl.Location = new System.Drawing.Point(9, 10);
+            this.RangeAnaLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.RangeAnaLbl.Name = "RangeAnaLbl";
-            this.RangeAnaLbl.Size = new System.Drawing.Size(198, 34);
+            this.RangeAnaLbl.Size = new System.Drawing.Size(132, 22);
             this.RangeAnaLbl.TabIndex = 0;
             this.RangeAnaLbl.Text = "Range Analysis";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 35);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(111, 13);
+            this.label1.TabIndex = 27;
+            this.label1.Text = "Select Non-Basic Var ";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(12, 74);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(88, 13);
+            this.label2.TabIndex = 28;
+            this.label2.Text = "Select Basic Var ";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(12, 119);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(113, 13);
+            this.label3.TabIndex = 29;
+            this.label3.Text = "Select Constraint RHS";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(12, 161);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(151, 13);
+            this.label4.TabIndex = 30;
+            this.label4.Text = "Select Variable in NBV column";
+            // 
             // SensitivityAnalysis
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.Controls.Add(this.sensAnalbl);
             this.Controls.Add(this.SensAnaTbl);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "SensitivityAnalysis";
-            this.Size = new System.Drawing.Size(1118, 1003);
-            this.Load += new System.EventHandler(this.SensitivityAnalysis_Load);
+            this.Size = new System.Drawing.Size(745, 652);
             this.SensAnaTbl.ResumeLayout(false);
             this.ApplyChangesPanel.ResumeLayout(false);
             this.ApplyChangesPanel.PerformLayout();
@@ -598,6 +668,7 @@
             this.AddNewElementsPanel.ResumeLayout(false);
             this.AddNewElementsPanel.PerformLayout();
             this.RangeAnalysisPanel.ResumeLayout(false);
+            this.RangeAnalysisPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -615,22 +686,22 @@
         private System.Windows.Forms.Label applychangesLbl;
         private System.Windows.Forms.Label addnewelLbl;
         private System.Windows.Forms.Label RangeAnaLbl;
-        private System.Windows.Forms.ComboBox selectBV;
-        private System.Windows.Forms.ComboBox selectCRHS;
-        private System.Windows.Forms.ComboBox selectVarNBV;
-        private System.Windows.Forms.ComboBox selectNBV;
-        private RoundedRichTextBox RangeResTxtb;
+        private System.Windows.Forms.ComboBox comboBoxBasicVar;
+        private System.Windows.Forms.ComboBox comboBoxConstraintRHS;
+        private System.Windows.Forms.ComboBox comboBoxVarInNBV;
+        private System.Windows.Forms.ComboBox comboBoxNonBasicVar;
+        private RoundedRichTextBox textBoxRangeResult;
         private RoundedRichTextBox roundedRichTextBox2;
         private RoundedRichTextBox addnewActtxtb;
-        private RoundedButton showRangeBtn1;
+        private RoundedButton buttonShowRangeNonBasic;
         private RoundedButton applybtn1;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.ComboBox comboBox3;
         private System.Windows.Forms.ComboBox comboBox4;
-        private RoundedButton showRangeBtn4;
-        private RoundedButton showRangeBtn3;
-        private RoundedButton showRangeBtn2;
+        private RoundedButton buttonShowRangeNBV;
+        private RoundedButton buttonShowRangeConstraint;
+        private RoundedButton buttonShowRangeBasic;
         private System.Windows.Forms.NumericUpDown numericUpDown4;
         private System.Windows.Forms.NumericUpDown numericUpDown3;
         private System.Windows.Forms.NumericUpDown numericUpDown2;
@@ -644,5 +715,9 @@
         private RoundedButton solveDualBtn;
         private RoundedButton dispShadPricBtn;
         private RoundedButton roundedButton5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
     }
 }
