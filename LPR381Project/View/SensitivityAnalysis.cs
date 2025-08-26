@@ -292,7 +292,31 @@ namespace LPR381Project
             }
         }
 
+        /// <summary>
+        /// Display Shadow Prices
+        /// </summary>
+        
+        private void dispShadPricBtn_Click(object sender, EventArgs e)
+        {
+            DisplayShadowPrices();
+        }
 
+        private void DisplayShadowPrices()
+        {
+            int numConstraints = _tableau.NumSlackSurplus;
+            int numVars = _tableau.NumVariables;
+            var shadowPrices = new List<string>();
+
+            // Shadow prices are in the last row (Z-row) of the tableau, corresponding to slack/surplus variables
+            for (int i = 0; i < numConstraints; i++)
+            {
+                int slackCol = numVars + i;
+                double shadowPrice = _tableau.Tableau[_tableau.Tableau.GetLength(0) - 1, slackCol];
+                shadowPrices.Add($"Constraint {i + 1}: {shadowPrice:F4}");
+            }
+
+            shadowPricetxtb.Text = string.Join(Environment.NewLine, shadowPrices);
+        }
     }
 }
 

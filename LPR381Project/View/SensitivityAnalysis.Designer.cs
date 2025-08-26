@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.SensAnaTbl = new System.Windows.Forms.TableLayoutPanel();
-            this.sensAnalbl = new System.Windows.Forms.Label();
             this.ApplyChangesPanel = new LPR381Project.RoundedPanel();
             this.textBoxResult = new LPR381Project.RoundedRichTextBox();
             this.numericUpDownNonBasic = new System.Windows.Forms.NumericUpDown();
@@ -72,6 +71,7 @@
             this.comboBoxVarInNBV = new System.Windows.Forms.ComboBox();
             this.comboBoxNonBasicVar = new System.Windows.Forms.ComboBox();
             this.RangeAnaLbl = new System.Windows.Forms.Label();
+            this.sensAnalbl = new System.Windows.Forms.Label();
             this.SensAnaTbl.SuspendLayout();
             this.ApplyChangesPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownNonBasic)).BeginInit();
@@ -100,18 +100,6 @@
             this.SensAnaTbl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.SensAnaTbl.Size = new System.Drawing.Size(732, 614);
             this.SensAnaTbl.TabIndex = 0;
-            // 
-            // sensAnalbl
-            // 
-            this.sensAnalbl.AutoSize = true;
-            this.sensAnalbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sensAnalbl.ForeColor = System.Drawing.Color.Black;
-            this.sensAnalbl.Location = new System.Drawing.Point(8, 10);
-            this.sensAnalbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.sensAnalbl.Name = "sensAnalbl";
-            this.sensAnalbl.Size = new System.Drawing.Size(131, 18);
-            this.sensAnalbl.TabIndex = 1;
-            this.sensAnalbl.Text = "Sensitivity Analysis";
             // 
             // ApplyChangesPanel
             // 
@@ -419,6 +407,7 @@
             this.dispShadPricBtn.TabIndex = 29;
             this.dispShadPricBtn.Text = "Display Shadow Prices";
             this.dispShadPricBtn.UseVisualStyleBackColor = false;
+            this.dispShadPricBtn.Click += new System.EventHandler(this.dispShadPricBtn_Click);
             // 
             // dualityLbl
             // 
@@ -699,6 +688,18 @@
             this.RangeAnaLbl.Size = new System.Drawing.Size(132, 22);
             this.RangeAnaLbl.TabIndex = 0;
             this.RangeAnaLbl.Text = "Range Analysis";
+            // 
+            // sensAnalbl
+            // 
+            this.sensAnalbl.AutoSize = true;
+            this.sensAnalbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sensAnalbl.ForeColor = System.Drawing.Color.Black;
+            this.sensAnalbl.Location = new System.Drawing.Point(8, 10);
+            this.sensAnalbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.sensAnalbl.Name = "sensAnalbl";
+            this.sensAnalbl.Size = new System.Drawing.Size(131, 18);
+            this.sensAnalbl.TabIndex = 1;
+            this.sensAnalbl.Text = "Sensitivity Analysis";
             // 
             // SensitivityAnalysis
             // 
