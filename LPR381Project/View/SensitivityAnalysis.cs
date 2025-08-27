@@ -344,14 +344,24 @@ namespace LPR381Project
             }
         }
 
-        
+/// <summary>
+/// Add new constraint
+/// </summary>
 
-        private void AddNewActivity()
+        private void roundedButton5_Click(object sender, EventArgs e)
         {
-            
+            using (var dialog = new AddConstraintDialog(_model.ObjectiveFunction.Count))
+            {
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    // Use the new dedicated class for the analysis
+                    var constraintAnalyzer = new NewConstraintAnalyzer(_model, _tableau);
+                    string result = constraintAnalyzer.AnalyzeAndReoptimize(dialog.VariableCoefficients, dialog.Rhs);
+                    MessageBox.Show(result, "New Constraint Analysis");
+                    roundedRichTextBox2.Text = result;
+                }
+            }
         }
-
-
     }
 }
 

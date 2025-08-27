@@ -448,6 +448,7 @@
             this.roundedButton5.TabIndex = 28;
             this.roundedButton5.Text = "Add new Constraint";
             this.roundedButton5.UseVisualStyleBackColor = false;
+            this.roundedButton5.Click += new System.EventHandler(this.roundedButton5_Click);
             // 
             // roundedButton4
             // 

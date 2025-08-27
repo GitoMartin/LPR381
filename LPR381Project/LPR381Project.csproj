@@ -52,6 +52,7 @@
     <Compile Include="Controller\Primal\DualSimplex.cs" />
     <Compile Include="Controller\Primal\PrimalSimplex.cs" />
     <Compile Include="Controller\Sensitivity Analysis\NewActivityAnalyzer.cs" />
+    <Compile Include="Controller\Sensitivity Analysis\NewConstraintAnalyzer.cs" />
     <Compile Include="Controller\Sensitivity Analysis\SensitivityRanges.cs" />
     <Compile Include="Controller\Sensitivity Analysis\SimplexSolver.cs" />
     <Compile Include="Model\Branch and bound.cs" />
@@ -67,6 +68,12 @@
     </Compile>
     <Compile Include="View\AddActivityDialog.Designer.cs">
       <DependentUpon>AddActivityDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\AddConstraintDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\AddConstraintDialog.Designer.cs">
+      <DependentUpon>AddConstraintDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="View\BranchAndBoundKnapsackPage.cs">
       <SubType>UserControl</SubType>
