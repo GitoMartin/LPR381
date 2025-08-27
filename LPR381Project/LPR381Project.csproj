@@ -51,6 +51,7 @@
     <Compile Include="Controller\Primal revised\Revised1primal.cs" />
     <Compile Include="Controller\Primal\DualSimplex.cs" />
     <Compile Include="Controller\Primal\PrimalSimplex.cs" />
+    <Compile Include="Controller\Sensitivity Analysis\NewActivityAnalyzer.cs" />
     <Compile Include="Controller\Sensitivity Analysis\SensitivityRanges.cs" />
     <Compile Include="Controller\Sensitivity Analysis\SimplexSolver.cs" />
     <Compile Include="Model\Branch and bound.cs" />
@@ -61,6 +62,12 @@
     <Compile Include="Model\CuttingPlane\TableauViewer.cs" />
     <Compile Include="Model\LPModel.cs" />
     <Compile Include="Model\Sensitivity analysis\SimplexTableau.cs" />
+    <Compile Include="View\AddActivityDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\AddActivityDialog.Designer.cs">
+      <DependentUpon>AddActivityDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\BranchAndBoundKnapsackPage.cs">
       <SubType>UserControl</SubType>
     </Compile>

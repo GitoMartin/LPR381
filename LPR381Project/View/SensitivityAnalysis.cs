@@ -1,5 +1,9 @@
-﻿using LPR381Project.Controller;
-using Lpr381back;
+﻿using Lpr381back;
+using LPR381Project.Controller;
+using LPR381Project.Controller.Knapsack;
+using LPR381Project.Controller.Sensitivity_Analysis;
+using LPR381Project.Model.Sensitivity_analysis;
+using LPR381Project.View;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,9 +13,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using LPR381Project.Controller.Sensitivity_Analysis;
-using LPR381Project.Controller.Knapsack;
-using LPR381Project.Model.Sensitivity_analysis;
 
 
 namespace LPR381Project
@@ -27,6 +28,8 @@ namespace LPR381Project
         private List<int> _nonBasicVarIndices;
         private List<int> _basicVarIndices;
 
+        private int _numConstraints;
+
         public SensitivityAnalysis(LPModel model)
         {
             InitializeComponent();
@@ -39,6 +42,7 @@ namespace LPR381Project
             // Initialize the index lists
             _nonBasicVarIndices = new List<int>();
             _basicVarIndices = new List<int>();
+            _numConstraints = _model.Rhs.Count;
 
             LoadComboboxes();
             AttachEventHandlers();
@@ -317,6 +321,37 @@ namespace LPR381Project
 
             shadowPricetxtb.Text = string.Join(Environment.NewLine, shadowPrices);
         }
+
+
+        /// <summary>
+        /// Add new activity (variable)
+        /// </summary>
+        private void roundedButton4_Click(object sender, EventArgs e)
+        {
+            
+            
+
+            using (var dialog = new AddActivityDialog(_model.Rhs.Count))
+            {
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    // Use the new dedicated class for the analysis
+                    var activityAnalyzer = new NewActivityAnalyzer(_model, _tableau);
+                    string result = activityAnalyzer.AnalyzeAndReoptimize(dialog.ObjectiveCoefficient, dialog.ConstraintCoefficients);
+                    MessageBox.Show(result, "New Activity Analysis");
+                    addnewActtxtb.Text = result;
+                }
+            }
+        }
+
+        
+
+        private void AddNewActivity()
+        {
+            
+        }
+
+
     }
 }
 

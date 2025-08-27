@@ -462,6 +462,7 @@
             this.roundedButton4.TabIndex = 27;
             this.roundedButton4.Text = "Add new Activity";
             this.roundedButton4.UseVisualStyleBackColor = false;
+            this.roundedButton4.Click += new System.EventHandler(this.roundedButton4_Click);
             // 
             // roundedRichTextBox2
             // 
@@ -472,10 +473,10 @@
             this.roundedRichTextBox2.CornerRadius = 12;
             this.roundedRichTextBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.roundedRichTextBox2.ForeColor = System.Drawing.Color.Black;
-            this.roundedRichTextBox2.Location = new System.Drawing.Point(30, 157);
+            this.roundedRichTextBox2.Location = new System.Drawing.Point(30, 141);
             this.roundedRichTextBox2.Margin = new System.Windows.Forms.Padding(2);
             this.roundedRichTextBox2.Name = "roundedRichTextBox2";
-            this.roundedRichTextBox2.Size = new System.Drawing.Size(298, 52);
+            this.roundedRichTextBox2.Size = new System.Drawing.Size(314, 68);
             this.roundedRichTextBox2.TabIndex = 10;
             this.roundedRichTextBox2.Text = "  New constraint coefficients, relation, RHS...";
             // 
@@ -488,10 +489,10 @@
             this.addnewActtxtb.CornerRadius = 12;
             this.addnewActtxtb.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addnewActtxtb.ForeColor = System.Drawing.Color.Black;
-            this.addnewActtxtb.Location = new System.Drawing.Point(30, 49);
+            this.addnewActtxtb.Location = new System.Drawing.Point(30, 32);
             this.addnewActtxtb.Margin = new System.Windows.Forms.Padding(2);
             this.addnewActtxtb.Name = "addnewActtxtb";
-            this.addnewActtxtb.Size = new System.Drawing.Size(275, 51);
+            this.addnewActtxtb.Size = new System.Drawing.Size(314, 68);
             this.addnewActtxtb.TabIndex = 9;
             this.addnewActtxtb.Text = "  New actvity coefficients";
             // 
