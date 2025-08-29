@@ -1,5 +1,9 @@
-﻿using LPR381Project.Controller;
-using Lpr381back;
+﻿using Lpr381back;
+using LPR381Project.Controller;
+using LPR381Project.Controller.Knapsack;
+using LPR381Project.Controller.Sensitivity_Analysis;
+using LPR381Project.Model.Sensitivity_analysis;
+using LPR381Project.View;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,205 +14,354 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace LPR381Project
 {
     public partial class SensitivityAnalysis : UserControl
     {
-        private SensitivityAnalysisController controller;
+        SimplexTableau _tableau;
+        private LPModel _model;
+        private SensitivityRanges _ranges;
+        SimplexSolver _solver;
 
-        public SensitivityAnalysis()
+        // Add these fields to store the actual variable indices
+        private List<int> _nonBasicVarIndices;
+        private List<int> _basicVarIndices;
+
+        private int _numConstraints;
+
+        public SensitivityAnalysis(LPModel model)
         {
             InitializeComponent();
-            controller = new SensitivityAnalysisController(Form1.model);
+            _model = model;
+
+            _solver = new SimplexSolver(_model);
+            _tableau = _solver.Solve();
+            _ranges = new SensitivityRanges(_tableau);
+
+            // Initialize the index lists
+            _nonBasicVarIndices = new List<int>();
+            _basicVarIndices = new List<int>();
+            _numConstraints = _model.Rhs.Count;
+
+            LoadComboboxes();
+            AttachEventHandlers();
         }
 
-
-        private void SensAnaTbl_Paint(object sender, PaintEventArgs e)
+        /// <summary>
+        /// Range Analysis
+        /// </summary>
+        private void LoadComboboxes()
         {
+            // Load Non-Basic Variables
+            var nonBasics = new List<string>();
+            _nonBasicVarIndices.Clear(); // Clear previous indices
 
-        }
-
-        private void SensitivityAnalysis_Load(object sender, EventArgs e)
-        {
-            LPModel currentModel = controller.GetLPModel();
-            List<List<double>> currentTableau = controller.GetFinalTableau();
-
-            List<string> allVariables = new List<string>();
-            for (int i = 0; i < currentModel.ObjectiveFunction.Count; i++)
+            for (int j = 0; j < _model.ObjectiveFunction.Count; j++)
             {
-                allVariables.Add($"x{i + 1}");
+                if (Array.IndexOf(_tableau.BasicVariables, j) < 0)
+                {
+                    nonBasics.Add($"x{j + 1}");
+                    _nonBasicVarIndices.Add(j); // Store the actual variable index
+                }
             }
+            comboBoxNonBasicVar.DataSource = nonBasics;
+            comboBoxNonBasicVar2.DataSource = new List<string>(nonBasics); // Create copy for second combobox
+            comboBoxVarInNBV.DataSource = new List<string>(nonBasics); // Create copy
+            comboBoxVarInNBV2.DataSource = new List<string>(nonBasics); // Create copy
 
-            List<string> basicVariables = new List<string>();
-            List<string> nonBasicVariables = new List<string>();
+            // Load Basic Variables
+            var basics = new List<string>();
+            _basicVarIndices.Clear(); // Clear previous indices
 
-            int numConstraints = currentModel.ConstraintCoefficients.Count;
-            int numOriginalVariables = currentModel.ObjectiveFunction.Count;
-            int numSlackSurplusVariables = currentTableau[0].Count - numOriginalVariables - 1; // -1 for RHS
-
-            // Identify basic and non-basic variables
-            for (int j = 0; j < numOriginalVariables + numSlackSurplusVariables; j++)
+            for (int i = 0; i < _tableau.BasicVariables.Length; i++)
             {
-                bool isBasic = false;
-                int oneCount = 0;
-                int oneRow = -1;
-
-                for (int i = 0; i < numConstraints; i++)
+                int varIdx = _tableau.BasicVariables[i];
+                if (varIdx < _model.ObjectiveFunction.Count)
                 {
-                    if (Math.Abs(currentTableau[i][j] - 1.0) < 1e-9)
-                    {
-                        oneCount++;
-                        oneRow = i;
-                    }
-                    else if (Math.Abs(currentTableau[i][j]) > 1e-9)
-                    {
-                        // Not a unit vector column
-                        isBasic = false;
-                        break;
-                    }
+                    basics.Add($"x{varIdx + 1}");
+                    _basicVarIndices.Add(varIdx); // Store the actual variable index
                 }
-
-                if (oneCount == 1)
+                else
                 {
-                    // Check if all other entries in the column are zero
-                    bool allOthersZero = true;
-                    for (int i = 0; i < numConstraints; i++)
-                    {
-                        if (i != oneRow && Math.Abs(currentTableau[i][j]) > 1e-9)
-                        {
-                            allOthersZero = false;
-                            break;
-                        }
-                    }
-
-                    if (allOthersZero)
-                    {
-                        isBasic = true;
-                    }
+                    basics.Add($"s{i + 1}");
+                    _basicVarIndices.Add(varIdx); // Store the actual variable index (slack variable)
                 }
+            }
+            comboBoxBasicVar.DataSource = basics;
+            comboBoxBasicVar2.DataSource = new List<string>(basics); // Create copy
 
-                if (isBasic)
+            // Load Constraint RHS
+            var constraints = new List<string>();
+            for (int i = 0; i < _model.Rhs.Count; i++)
+            {
+                constraints.Add($"Constraint {i + 1} (RHS: {_model.Rhs[i]})");
+            }
+            comboBoxConstraintRHS.DataSource = constraints;
+            comboBoxConstraintRHS2.DataSource = new List<string>(constraints); // Create copy
+        }
+
+        private void AttachEventHandlers()
+        {
+            buttonShowRangeNonBasic.Click += (s, e) => ShowRangeNonBasic();
+            buttonShowRangeBasic.Click += (s, e) => ShowRangeBasic();
+            buttonShowRangeConstraint.Click += (s, e) => ShowRangeConstraint();
+            buttonShowRangeNBV.Click += (s, e) => ShowRangeNBV();
+            buttonApplyNonBasic.Click += (s, e) => ApplyChangeNonBasic();
+            buttonApplyBasic.Click += (s, e) => ApplyChangeBasic();
+            buttonApplyConstraint.Click += (s, e) => ApplyChangeConstraint();
+            buttonApplyNBV.Click += (s, e) => ApplyChangeNBV();
+        }
+
+        private void ShowRangeNonBasic()
+        {
+            if (comboBoxNonBasicVar.SelectedIndex >= 0)
+            {
+                // Use the actual variable index instead of combobox index
+                int j = _nonBasicVarIndices[comboBoxNonBasicVar.SelectedIndex];
+                var (minDelta, maxDelta) = _ranges.GetObjectiveCoefRange(j);
+                textBoxRangeResult.Text = _ranges.FormatRange(minDelta, maxDelta, _model.ObjectiveFunction[j]);
+            }
+        }
+
+        private void ShowRangeBasic()
+        {
+            if (comboBoxBasicVar.SelectedIndex >= 0)
+            {
+                // Use the actual variable index instead of tableau basic variable index
+                int j = _basicVarIndices[comboBoxBasicVar.SelectedIndex];
+                if (j < _model.ObjectiveFunction.Count)
                 {
-                    if (j < numOriginalVariables)
+                    var (minDelta, maxDelta) = _ranges.GetObjectiveCoefRange(j);
+                    textBoxRangeResult.Text = _ranges.FormatRange(minDelta, maxDelta, _model.ObjectiveFunction[j]);
+                }
+                else
+                {
+                    // Handle slack variable case if needed, or skip
+                    textBoxRangeResult.Text = "Range not applicable for slack variables.";
+                }
+            }
+        }
+
+        private void ShowRangeConstraint()
+        {
+            if (comboBoxConstraintRHS.SelectedIndex >= 0)
+            {
+                int i = comboBoxConstraintRHS.SelectedIndex;
+                var (minGamma, maxGamma) = _ranges.GetRHSRange(i);
+                textBoxRangeResult.Text = _ranges.FormatRange(minGamma, maxGamma, _model.Rhs[i]);
+            }
+        }
+
+        private void ShowRangeNBV()
+        {
+            if (comboBoxVarInNBV.SelectedIndex >= 0 && comboBoxConstraintRHS.SelectedIndex >= 0)
+            {
+                // Use the actual variable index instead of combobox index
+                int j = _nonBasicVarIndices[comboBoxVarInNBV.SelectedIndex];
+                int i = comboBoxConstraintRHS.SelectedIndex;
+                var (minDelta, maxDelta) = _ranges.GetMatrixCoefRange(i, j);
+                textBoxRangeResult.Text = _ranges.FormatRange(minDelta, maxDelta, _model.ConstraintCoefficients[i][j]);
+            }
+        }
+
+        /// <summary>
+        /// Apply Changes
+        /// </summary>  
+
+        private void ApplyChangeNonBasic()
+        {
+            if (comboBoxNonBasicVar2.SelectedIndex >= 0)
+            {
+                // Use the actual variable index from the second combobox
+                int j = _nonBasicVarIndices[comboBoxNonBasicVar2.SelectedIndex];
+                double delta = (double)numericUpDownNonBasic.Value;
+                var (minDelta, maxDelta) = _ranges.GetObjectiveCoefRange(j);
+                if (delta >= minDelta && delta <= maxDelta)
+                {
+                    _model.ObjectiveFunction[j] += delta;
+
+                    // Recalculate everything after the change
+                    _tableau = _solver.Solve();
+                    _ranges = new SensitivityRanges(_tableau);
+                    LoadComboboxes(); // Reload comboboxes as basic/non-basic variables might change
+
+                    textBoxResult.Text = $"Applied change to x{j + 1}\nNew Objective Value: {_tableau.ObjectiveValue}\nUpdated Coefficient: {_model.ObjectiveFunction[j]}";
+                }
+                else
+                {
+                    textBoxResult.Text = $"Change out of allowable range for x{j + 1}!\nAllowable range: [{minDelta:F2}, {maxDelta:F2}]";
+                }
+            }
+            else
+            {
+                textBoxResult.Text = "Please select a non-basic variable to apply changes to.";
+            }
+        }
+
+        private void ApplyChangeBasic()
+        {
+            if (comboBoxBasicVar2.SelectedIndex >= 0)
+            {
+                // Use the actual variable index from the second combobox
+                int j = _basicVarIndices[comboBoxBasicVar2.SelectedIndex];
+                if (j < _model.ObjectiveFunction.Count)
+                {
+                    double delta = (double)numericUpDownBasic.Value;
+                    var (minDelta, maxDelta) = _ranges.GetObjectiveCoefRange(j);
+                    if (delta >= minDelta && delta <= maxDelta)
                     {
-                        basicVariables.Add($"x{j + 1}");
+                        _model.ObjectiveFunction[j] += delta;
+
+                        // Recalculate everything after the change
+                        _tableau = _solver.Solve();
+                        _ranges = new SensitivityRanges(_tableau);
+                        LoadComboboxes(); // Reload comboboxes as basic/non-basic variables might change
+
+                        textBoxResult.Text = $"Applied change to x{j + 1}\nNew Objective Value: {_tableau.ObjectiveValue}\nUpdated Coefficient: {_model.ObjectiveFunction[j]}";
                     }
                     else
                     {
-                        // This is a slack/surplus variable that is basic
-                        basicVariables.Add($"s{j - numOriginalVariables + 1}");
+                        textBoxResult.Text = $"Change out of allowable range for x{j + 1}!\nAllowable range: [{minDelta:F2}, {maxDelta:F2}]";
                     }
                 }
                 else
                 {
-                    if (j < numOriginalVariables)
-                    {
-                        nonBasicVariables.Add($"x{j + 1}");
-                    }
-                    else
-                    {
-                        // This is a slack/surplus variable that is non-basic
-                        nonBasicVariables.Add($"s{j - numOriginalVariables + 1}");
-                    }
+                    textBoxResult.Text = "Cannot apply changes to slack variables.";
                 }
             }
+            else
+            {
+                textBoxResult.Text = "Please select a basic variable to apply changes to.";
+            }
+        }
 
-            // Populate ComboBoxes
-            selectNBV.Items.AddRange(nonBasicVariables.ToArray());
-            comboBox4.Items.AddRange(nonBasicVariables.ToArray());
+        private void ApplyChangeConstraint()
+        {
+            if (comboBoxConstraintRHS2.SelectedIndex >= 0)
+            {
+                int i = comboBoxConstraintRHS2.SelectedIndex;
+                double gamma = (double)numericUpDownConstraint.Value;
+                var (minGamma, maxGamma) = _ranges.GetRHSRange(i);
+                if (gamma >= minGamma && gamma <= maxGamma)
+                {
+                    _model.Rhs[i] += gamma;
 
-            selectBV.Items.AddRange(basicVariables.ToArray());
-            comboBox1.Items.AddRange(basicVariables.ToArray());
+                    // Recalculate everything after the change
+                    _tableau = _solver.Solve();
+                    _ranges = new SensitivityRanges(_tableau);
+                    LoadComboboxes(); // Reload comboboxes as basic/non-basic variables might change
 
-            // Populate Constraint RHS ComboBoxes
+                    textBoxResult.Text = $"Applied change to Constraint {i + 1}\nNew Objective Value: {_tableau.ObjectiveValue}\nUpdated RHS: {_model.Rhs[i]}";
+                }
+                else
+                {
+                    textBoxResult.Text = $"Change out of allowable range for Constraint {i + 1}!\nAllowable range: [{minGamma:F2}, {maxGamma:F2}]";
+                }
+            }
+            else
+            {
+                textBoxResult.Text = "Please select a constraint to apply changes to.";
+            }
+        }
+
+        private void ApplyChangeNBV()
+        {
+            if (comboBoxVarInNBV2.SelectedIndex >= 0 && comboBoxConstraintRHS2.SelectedIndex >= 0)
+            {
+                // Use the actual variable index from the second comboboxes
+                int j = _nonBasicVarIndices[comboBoxVarInNBV2.SelectedIndex];
+                int i = comboBoxConstraintRHS2.SelectedIndex;
+                double delta = (double)numericUpDownNBV.Value;
+                var (minDelta, maxDelta) = _ranges.GetMatrixCoefRange(i, j);
+                if (delta >= minDelta && delta <= maxDelta)
+                {
+                    _model.ConstraintCoefficients[i][j] += delta;
+
+                    // Recalculate everything after the change
+                    _tableau = _solver.Solve();
+                    _ranges = new SensitivityRanges(_tableau);
+                    LoadComboboxes(); // Reload comboboxes as basic/non-basic variables might change
+
+                    textBoxResult.Text = $"Applied change to x{j + 1} in Constraint {i + 1}\nNew Objective Value: {_tableau.ObjectiveValue}\nUpdated Coefficient: {_model.ConstraintCoefficients[i][j]}";
+                }
+                else
+                {
+                    textBoxResult.Text = $"Change out of allowable range for x{j + 1} in Constraint {i + 1}!\nAllowable range: [{minDelta:F2}, {maxDelta:F2}]";
+                }
+            }
+            else
+            {
+                textBoxResult.Text = "Please select both a variable and constraint to apply changes to.";
+            }
+        }
+
+        /// <summary>
+        /// Display Shadow Prices
+        /// </summary>
+        
+        private void dispShadPricBtn_Click(object sender, EventArgs e)
+        {
+            DisplayShadowPrices();
+        }
+
+        private void DisplayShadowPrices()
+        {
+            int numConstraints = _tableau.NumSlackSurplus;
+            int numVars = _tableau.NumVariables;
+            var shadowPrices = new List<string>();
+
+            // Shadow prices are in the last row (Z-row) of the tableau, corresponding to slack/surplus variables
             for (int i = 0; i < numConstraints; i++)
             {
-                selectCRHS.Items.Add($"Constraint {i + 1}");
-                comboBox2.Items.Add($"Constraint {i + 1}");
+                int slackCol = numVars + i;
+                double shadowPrice = _tableau.Tableau[_tableau.Tableau.GetLength(0) - 1, slackCol];
+                shadowPrices.Add($"Constraint {i + 1}: {shadowPrice:F4}");
             }
 
-            // Populate Variable in NBV column ComboBoxes (using all original variables for now)
-            selectVarNBV.Items.AddRange(allVariables.ToArray());
-            comboBox3.Items.AddRange(allVariables.ToArray());
+            shadowPricetxtb.Text = string.Join(Environment.NewLine, shadowPrices);
         }
 
-        private void selectNBV_SelectedIndexChanged(object sender, EventArgs e)
-        {
 
-        }
-
-        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void showRangeBtn1_Click(object sender, EventArgs e)
-        {
-            RangeResTxtb.Text = controller.GetNonBasicVariableRange(selectNBV.SelectedItem.ToString());
-        }
-
-        private void showRangeBtn2_Click(object sender, EventArgs e)
-        {
-            RangeResTxtb.Text = controller.GetBasicVariableRange(selectBV.SelectedItem.ToString());
-        }
-
-        private void showRangeBtn3_Click(object sender, EventArgs e)
-        {
-            RangeResTxtb.Text = controller.GetConstraintRhsRange(selectCRHS.SelectedIndex);
-        }
-
-        private void showRangeBtn4_Click(object sender, EventArgs e)
-        {
-            RangeResTxtb.Text = controller.GetVariableInNonBasicVariableColumnRange(selectVarNBV.SelectedItem.ToString(), selectVarNBV.SelectedIndex);
-        }
-
-        private void applybtn1_Click(object sender, EventArgs e)
-        {
-            controller.ApplyNonBasicVariableChange(comboBox4.SelectedItem.ToString(), (double)numericUpDown1.Value);
-        }
-
-        private void roundedButton1_Click(object sender, EventArgs e)
-        {
-            controller.ApplyBasicVariableChange(comboBox1.SelectedItem.ToString(), (double)numericUpDown2.Value);
-        }
-
-        private void roundedButton2_Click(object sender, EventArgs e)
-        {
-            controller.ApplyConstraintRhsChange(comboBox2.SelectedIndex, (double)numericUpDown3.Value);
-        }
-
-        private void roundedButton3_Click(object sender, EventArgs e)
-        {
-            controller.ApplyVariableInNonBasicVariableColumnChange(comboBox3.SelectedItem.ToString(), comboBox3.SelectedIndex, (double)numericUpDown4.Value);
-        }
-
+        /// <summary>
+        /// Add new activity (variable)
+        /// </summary>
         private void roundedButton4_Click(object sender, EventArgs e)
         {
-            // Expected format: "coeff1,coeff2,...,objective_coeff"
-            // Example: "2,3,5" for a new activity with coefficients 2, 3 for constraints and 5 for objective
-            List<double> newActivityCoefficients = addnewActtxtb.Text.Split(',').Select(double.Parse).ToList();
-            controller.AddNewActivity(newActivityCoefficients);
+            
+            
+
+            using (var dialog = new AddActivityDialog(_model.Rhs.Count))
+            {
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    // Use the new dedicated class for the analysis
+                    var activityAnalyzer = new NewActivityAnalyzer(_model, _tableau);
+                    string result = activityAnalyzer.AnalyzeAndReoptimize(dialog.ObjectiveCoefficient, dialog.ConstraintCoefficients);
+                    MessageBox.Show(result, "New Activity Analysis");
+                    addnewActtxtb.Text = result;
+                }
+            }
         }
+
+/// <summary>
+/// Add new constraint
+/// </summary>
 
         private void roundedButton5_Click(object sender, EventArgs e)
         {
-            // Expected format: "coeff1,coeff2,...,inequality_sign,rhs_value"
-            // Example: "1,1,<=,10" for a new constraint x1 + x2 <= 10
-            var parts = roundedRichTextBox2.Text.Split(',');
-            var coefficients = parts.Take(parts.Length - 2).Select(double.Parse).ToList();
-            var inequality = parts[parts.Length - 2];
-            var rhs = double.Parse(parts[parts.Length - 1]);
-            controller.AddNewConstraint(coefficients, inequality, rhs);
-        }
-
-        private void dispShadPricBtn_Click(object sender, EventArgs e)
-        {
-            shadowPricetxtb.Text = controller.GetShadowPrices();
-        }
-
-        private void solveDualBtn_Click(object sender, EventArgs e)
-        {
-            roundedRichTextBox3.Text = controller.SolveDualModel();
+            using (var dialog = new AddConstraintDialog(_model.ObjectiveFunction.Count))
+            {
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    // Use the new dedicated class for the analysis
+                    var constraintAnalyzer = new NewConstraintAnalyzer(_model, _tableau);
+                    string result = constraintAnalyzer.AnalyzeAndReoptimize(dialog.VariableCoefficients, dialog.Rhs);
+                    MessageBox.Show(result, "New Constraint Analysis");
+                    roundedRichTextBox2.Text = result;
+                }
+            }
         }
     }
 }
+
