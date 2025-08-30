@@ -25,10 +25,14 @@ namespace LPR381Project
         {
             InitializeComponent();
             contentHost.AutoScroll = true;
-            var primalControl = new PrimalSimplexControl(model);
-            primalControl.Dock = DockStyle.Fill;
-            contentHost.Controls.Clear();
-            contentHost.Controls.Add(primalControl);
+            Label placeholder = new Label();
+            placeholder.Text = "Please load a model to start.";
+            placeholder.TextAlign = ContentAlignment.MiddleCenter;
+            placeholder.Dock = DockStyle.Fill;
+            contentHost.Controls.Add(placeholder);
+            this.MaximizeBox = true;    
+            this.FormBorderStyle = FormBorderStyle.Sizable;
+            this.WindowState = FormWindowState.Maximized;
 
         }
 
@@ -65,6 +69,13 @@ namespace LPR381Project
             StyleTitleBarButton(btn_Max, Color.LightGray);
             StyleTitleBarButton(btn_Close, Color.Red);
             SetupCenteredPlaceholder();
+            SensitivityAnalysis.Enabled = false;
+            PrimalSimplex.Enabled = false;
+            RevisedPrimalSimplex.Enabled = false;
+            CuttingPlane.Enabled = false;
+            BranchBoundKnap.Enabled = false;
+            BranchAndBound.Enabled = false;
+
         }
 
         private void RoundButton(Button btn, int radius = 10)
@@ -338,17 +349,18 @@ namespace LPR381Project
 
         private void SensitivityAnalysis_Click(object sender, EventArgs e)
         {
-            contentHost.Controls.Clear();
-            try
-            {
-                SensitivityAnalysis saPage = new SensitivityAnalysis(model);
-                saPage.Dock = DockStyle.Fill;
-                contentHost.Controls.Add(saPage);
-            }
-            catch (Exception ex)
+            if (model == null)
             {
                 MessageBox.Show("Model not yet loaded");
+                return;
             }
+
+            contentHost.Controls.Clear();
+
+            // Always load the page
+            SensitivityAnalysis saPage = new SensitivityAnalysis(model);
+            saPage.Dock = DockStyle.Fill;
+            contentHost.Controls.Add(saPage);
         }
 
         private void CuttingPlane_Click_1(object sender, EventArgs e)
@@ -382,29 +394,46 @@ namespace LPR381Project
                     model = new LPModel();
                     ReadWriter reader = new ReadWriter();
 
-                    // Parse file into LPModel
-                    reader.ReadFromFile(model, ofd.FileName);
-
-                    StringBuilder sb = new StringBuilder();
-
-                    // Objective
-                    sb.AppendLine($"Type: {model.Type}");
-                    sb.AppendLine($"Objective: {string.Join(", ", model.ObjectiveFunction)}");
-
-                    // Constraints
-                    sb.AppendLine("Constraints:");
-                    for (int i = 0; i < model.ConstraintCoefficients.Count; i++)
+                    try
                     {
-                        string coeffs = string.Join(", ", model.ConstraintCoefficients[i]);
-                        string rhs = model.ConstraintInequalities[i]; // stored last token
-                        sb.AppendLine($"[{coeffs}] = {rhs}");
+                        // Parse file into LPModel
+                        reader.ReadFromFile(model, ofd.FileName);
+
+                        // Display model details in InputModelTxt1
+                        StringBuilder sb = new StringBuilder();
+
+                        // Objective
+                        sb.AppendLine($"Type: {model.Type}");
+                        sb.AppendLine($"Objective: {string.Join(", ", model.ObjectiveFunction)}");
+
+                        // Constraints
+                        sb.AppendLine("Constraints:");
+                        for (int i = 0; i < model.ConstraintCoefficients.Count; i++)
+                        {
+                            string coeffs = string.Join(", ", model.ConstraintCoefficients[i]);
+                            string rhs = model.ConstraintInequalities[i]; // stored last token
+                            sb.AppendLine($"[{coeffs}] = {rhs}");
+                        }
+
+                        // Signs
+                        sb.AppendLine($"Signs: {string.Join(", ", model.Signs)}");
+
+                        // Show in input box
+                        InputModelTxt1.Text = sb.ToString();
+
+                        // Enable buttons now that model is loaded
+                        SensitivityAnalysis.Enabled = true;
+                        PrimalSimplex.Enabled = true;
+                        RevisedPrimalSimplex.Enabled = true;
+                        CuttingPlane.Enabled = true;
+                        BranchBoundKnap.Enabled = true;
+                        BranchAndBound.Enabled = true;
                     }
-
-                    // Signs
-                    sb.AppendLine($"Signs: {string.Join(", ", model.Signs)}");
-
-                    // Show in inputbox
-                    InputModelTxt1.Text = sb.ToString();
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error loading model: {ex.Message}", "Load Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        model = null;
+                    }
                 }
             }
         }

@@ -30,12 +30,12 @@ using System.Globalization;
             var tableau = BuildCanonicalForm();
             _iterations.Add(CloneTableau(tableau));
 
-            // if all RHS >= 0 → use primal simplex
-            bool feasible = tableau.Take(tableau.Count - 1).All(row => row.Last() >= -Eps);
+            // Check primal feasibility (RHS >= 0)
+            bool feasible = IsDualFeasible(tableau);
 
             if (feasible)
             {
-                // primal simplex loop
+                // Phase II directly (primal simplex): drive reduced costs >= 0
                 while (!IsOptimal(tableau))
                 {
                     int pivotCol = ChooseEnteringVariable(tableau);
@@ -46,11 +46,20 @@ using System.Globalization;
             }
             else
             {
-                // dual simplex loop
+                // Phase I (dual simplex): drive RHS >= 0
                 while (!IsDualFeasible(tableau))
                 {
-                    int pivotRow = ChooseLeavingRowDual(tableau);   // row with most negative RHS
+                    int pivotRow = ChooseLeavingRowDual(tableau);       // most negative RHS
                     int pivotCol = ChooseEnteringColDual(tableau, pivotRow);
+                    Pivot(tableau, pivotRow, pivotCol);
+                    _iterations.Add(CloneTableau(tableau));
+                }
+
+                // Phase II (primal simplex): now ensure reduced costs >= 0
+                while (!IsOptimal(tableau))
+                {
+                    int pivotCol = ChooseEnteringVariable(tableau);
+                    int pivotRow = ChooseLeavingVariable(tableau, pivotCol);
                     Pivot(tableau, pivotRow, pivotCol);
                     _iterations.Add(CloneTableau(tableau));
                 }
@@ -449,13 +458,17 @@ using System.Globalization;
             double best = double.PositiveInfinity;
 
             var z = T.Last();
-            for (int j = 0; j < z.Count - 1; j++)
+            int lastCol = z.Count - 1;
+
+            for (int j = 0; j < lastCol; j++)
             {
                 double a = T[row][j];
-                if (a < -Eps) // only consider negative coefficients
+                double rc = z[j]; // reduced cost in our -c convention (negative means improving for max)
+
+                if (a < -Eps && rc < -Eps)
                 {
-                    double ratio = Math.Abs(z[j] / a);
-                    if (ratio < best)
+                    double ratio = Math.Abs(rc / a); // classic dual ratio test
+                    if (ratio < best - 1e-12)
                     {
                         best = ratio;
                         col = j;

@@ -36,10 +36,32 @@ namespace LPR381Project
             _model = model;
 
             _solver = new SimplexSolver(_model);
-            _tableau = _solver.Solve();
-            _ranges = new SensitivityRanges(_tableau);
 
-            // Initialize the index lists
+            try
+            {
+                _tableau = _solver.Solve();
+                _ranges = new SensitivityRanges(_tableau);
+            }
+            catch (InvalidOperationException ex) when (ex.Message.Contains("unbounded"))
+            {
+                // Still load the page, show a small warning
+                Label warning = new Label()
+                {
+                    Text = "⚠ LP flagged as unbounded. Sensitivity ranges may be limited.",
+                    ForeColor = Color.OrangeRed,
+                    Font = new Font("Segoe UI", 10, FontStyle.Bold),
+                    AutoSize = true,
+                    Dock = DockStyle.Top,
+                    TextAlign = ContentAlignment.MiddleCenter
+                };
+                this.Controls.Add(warning);
+
+                // Use a dummy tableau so page doesn't crash
+                _tableau = new SimplexTableau(); // empty/dummy tableau
+                _ranges = new SensitivityRanges(_tableau);
+            }
+
+            // Initialize lists safely even if unbounded
             _nonBasicVarIndices = new List<int>();
             _basicVarIndices = new List<int>();
             _numConstraints = _model.Rhs.Count;
@@ -361,6 +383,58 @@ namespace LPR381Project
                     roundedRichTextBox2.Text = result;
                 }
             }
+        }
+
+        private void ApplyChangesPanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void solveDualBtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var dual = new Lpr381back.DualSimplex(_model);
+                var iters = dual.Solve();                    // runs dual (and then primal phase II after the fix below)
+                var finalTab = iters.Last();                 // last tableau
+
+                // Infer sizes
+                int totalCols = finalTab[0].Count;
+                int n = _model.ObjectiveFunction.Count;
+                int m = finalTab.Count - 1;                  // rows minus objective row
+                int slackStart = n;                          // slacks are right after the x's
+
+                // Dual variables (shadow prices) live in Z-row under the slack columns
+                var z = finalTab.Last();
+                var y = new List<double>();
+                for (int i = 0; i < m; i++)
+                {
+                    int col = slackStart + i;
+                    if (col < totalCols - 1)                 // guard (last col is RHS)
+                        y.Add(z[col]);
+                }
+
+                double dualObj = z.Last();                   // RHS of Z row
+
+                // Show nicely
+                var sb = new StringBuilder();
+                sb.AppendLine("Dual solution:");
+                for (int i = 0; i < y.Count; i++)
+                    sb.AppendLine($"y{i + 1} = {y[i]:0.####}");
+                sb.AppendLine($"Dual objective = {dualObj:0.####}");
+
+                roundedRichTextBox3.Text = sb.ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Dual solve failed: {ex.Message}", "Dual Error",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void roundedRichTextBox3_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
